@@ -1,0 +1,13 @@
+<li><a href="blog.php">blog</a></li>
+                                            <li><a href="#">pages</a>
+                                                <ul>
+                                                    <li><a href="blog.php">Blog</a></li>
+                                                    <li><a href="blog-details.php">Blog Details</a></li>
+                                                    <li><a href="cart.php">Cart page</a></li>
+                                                    <li><a href="checkout.php">checkout</a></li>
+                                                    <li><a href="contact.php">contact</a></li>
+                                                    <li><a href="product-grid.php">product grid</a></li>
+                                                    <li><a href="product-details.php">product details</a></li>
+                                                    <li><a href="wishlist.php">wishlist</a></li>
+                                                </ul>
+                                            </li>
