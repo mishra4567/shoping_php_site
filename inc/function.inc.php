@@ -24,7 +24,7 @@ function get_product(
     $cat_id = '',
     $product_id = '',
     $search_str = '',
-    $sort_order
+    $sort_order = ''
 ) {
     $sql = "SELECT product.*,categories.categories FROM product,categories WHERE product.status=1";
     if ($cat_id != '') {
@@ -38,7 +38,7 @@ function get_product(
         $sql .= " AND (product.name LIKE '%$search_str%' OR product.description LIKE '%$search_str%') ";
     }
     if ($sort_order != '') {
-        $sql .= $sort_order ;
+        $sql .= $sort_order;
     } else {
         $sql .= " ORDER BY product.id DESC ";
     }
