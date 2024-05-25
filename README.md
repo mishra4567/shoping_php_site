@@ -8,7 +8,7 @@ Extract it in your xampp htdocs folder then open it then you see "shoping.sql" f
 
 create first database :- shoping
 
-add ad all table in data base :- shoping.sql
+add all table in data base :- shoping.sql
 
 
 
