@@ -87,15 +87,15 @@ include_once("./top-inc.php");
                                         <img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $list['image'] ?>" alt="product images">
                                     </a>
                                 </div>
-                                <!-- <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+                                <div class="fr__hover__info">
+                                    <ul class="product__action">
+                                        <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
 
-                                    <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                        <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
 
-                                    <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                </ul>
-                            </div> -->
+                                        <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
+                                    </ul>
+                                </div>
                                 <div class="fr__product__inner">
                                     <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
                                     <ul class="fr__pro__prize">

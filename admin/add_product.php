@@ -124,7 +124,7 @@ include("./sideber.inc.php");
                                 <select name="categories_id" id="" class="form-control">
                                     <option value="">Select Category</option>
                                     <?php
-                                    $result = mysqli_query($con, "SELECT id,categories FROM categories ORDER BY categories ASC");
+                                    $result = mysqli_query($con, "SELECT id,categories FROM categories WHERE STATUS='1' ORDER BY categories ASC");
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         if ($row['id'] == $categories_id) {
                                             echo "<option selected value=".$row['id'].">".$row['categories']."</option>";

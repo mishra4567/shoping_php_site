@@ -318,6 +318,32 @@
 
                });
            }
+           //    send messege script
+           function send_message() {
+               var name = jQuery("#name").val();
+               var email = jQuery("#email").val();
+               var mobail = jQuery("#mobail").val();
+               var message = jQuery("#message").val();
+
+               if (name == "") {
+                   alert('Please enter name');
+               } else if (email == "") {
+                   alert('Please enter email');
+               } else if (mobail == "") {
+                   alert('Please enter mobail');
+               } else if (message == "") {
+                   alert('Please enter message');
+               } else {
+                   jQuery.ajax({
+                       url: './send_message.php',
+                       type: 'post',
+                       data: 'name=' + name + '&email=' + email + '&mobail=' + mobail + '&message=' + message,
+                       success: function(result) {
+                           alert(result);
+                       }
+                   })
+               }
+           }
        </script>
 
 
@@ -326,6 +352,7 @@
        <script src="js/waypoints.min.js"></script>
        <!-- Main js file that contents all jQuery plugins activation. -->
        <script src="js/main.js"></script>
+
 
        </body>
 

@@ -60,14 +60,14 @@ $order_id = get_safe_value($con, $_GET['id']);
                                             <td class="product-add-to-cart"><?php echo $row['name'] ?></td>
                                             <td class="product-add-to-cart"><img src="<?php echo PRODUCT_IMAGE_SITE_PATH, $row['image'] ?>" alt="product image"></td>
                                             <td class="product-add-to-cart"><?php echo $row['qty'] ?></td>
-                                            <td class="product-add-to-cart"><?php echo $row['price'] ?></td>
-                                            <td class="product-add-to-cart"><?php echo $row['qty'] * $row['price'] ?></td>
+                                            <td class="product-add-to-cart">$<?php echo $row['price'] ?></td>
+                                            <td class="product-add-to-cart">$<?php echo $row['qty'] * $row['price'] ?></td>
                                         </tr>
                                     <?php } ?>
                                     <tr>
                                         <td colspan="3"></td>
                                         <td class="product-add-to-cart">Total Price</td>
-                                        <td class="product-add-to-cart"><?php echo $total_price ?></td>
+                                        <td class="product-add-to-cart">$<?php echo $total_price ?></td>
                                     </tr>
                                 </tbody>
                                 <!-- include("./tfoot.txt) -->
