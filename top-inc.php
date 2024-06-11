@@ -9,8 +9,17 @@ while ($row = mysqli_fetch_assoc($cat_res)) {
     $cat_arr[] = $row;
 }
 
-$obj=new add_to_cart();
-$totalProduct=$obj->totalProduct();
+$obj = new add_to_cart();
+$totalProduct = $obj->totalProduct();
+
+if (isset($_SESSION['USER_LOGIN'])) {
+    $uid = $_SESSION['USER_ID'];
+    if (isset($_GET['wishlist_id'])) {
+        $wid = $_GET['wishlist_id'];
+        mysqli_query($con, "DELETE FROM wishlist WHERE id='$wid' AND user_id='$uid'");
+    }
+    $wishlist_count = mysqli_num_rows(mysqli_query($con, "SELECT product.name,product.image,product.price,product.mrp,wishlist.id FROM product,wishlist WHERE wishlist.product_id=product.id AND wishlist.user_id='$uid'"));
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -98,11 +107,12 @@ $totalProduct=$obj->totalProduct();
                                         <a class="a_line" title="Search" href="#"><i class="icon-magnifier icons"></i></a>
                                     </div>
                                     <div class="header__account">
-                                        <?php if (isset($_SESSION['USER_LOGIN'])) {    
+                                        <?php if (isset($_SESSION['USER_LOGIN'])) {
                                         ?>
-                                             <ul class="main__menu ">
+                                            <ul class="main__menu ">
                                                 <li class="drop"><a class="a_line_before" href="#"><i class="icon-user "></i></a>
                                                     <ul class="dropdown">
+                                                        <li><a href="./wishlist.php"> wishlist &nbsp;<i class="icon-heart icons"></i></a></li>
                                                         <li><a href="./myorder.php"> My Order &nbsp;<i class="icon-basket-loaded"></i></a></li>
                                                         <li><a href="./logout.php">Log Out &nbsp; <i class="icon-logout icons"></i></a></li>
                                                     </ul>
@@ -119,6 +129,13 @@ $totalProduct=$obj->totalProduct();
                                         <a class="" href="./cart.php"><i class="icon-handbag icons"></i></a>
                                         <a title="Cart" href="./cart.php"><span class="htc__qua"><?php echo $totalProduct ?></span></a>
                                     </div>
+                                    <?php if (isset($_SESSION['USER_ID'])) { ?>
+                                        <div class="htc__shopping__wish">
+                                            <!-- <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a> -->
+                                            <a class="" href="./wishlist.php"><i class="icon-heart icons"></i></a>
+                                            <a title="Cart" href="./wishlist.php"><span class="htc__wishlist"><?php echo $wishlist_count ?></span></a>
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>

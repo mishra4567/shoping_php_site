@@ -31,3 +31,55 @@
   font-family: "Poppins";
   cursor: pointer;
 }
+
+.htc__shopping__wish {
+  margin-right: 39px;
+  margin-left: 15px;
+}
+.htc__shopping__wish a i {
+  font-size: 20px;
+}
+
+.htc__shopping__wish a span.htc__wishlist {
+  background: #c43b68;
+  border-radius: 100%;
+  color: #fff;
+  font-size: 9px;
+  height: 17px;
+  line-height: 18px;
+  position: absolute;
+  /* right: -5px; */
+  text-align: center;
+  top: 20px;
+  width: 17px;
+  margin-left: -10px;
+}
+
+/* .header--3 .htc__shopping__wish {
+  margin-right: 55px;
+} 
+.header--4 .htc__shopping__wish a i {
+  color: #fff;
+}
+.header--4 .scroll-header .htc__shopping__wish a i {
+  color: #333;
+}
+.htc__shopping__wish {
+  margin-right: 30px;
+}
+.header--two .htc__shopping__wish {
+  justify-content: inherit;
+  float: left;
+    z-index: 9999;
+}
+.header--3 .htc__shopping__wish {
+  margin-right: 55px;
+}   
+.header--4 .htc__shopping__wish a i {
+  color: #fff;
+}
+.header--4 .scroll-header .htc__shopping__wish a i {
+  color: #333;
+}
+
+ */

@@ -3,30 +3,33 @@ require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
 $cat_id = mysqli_real_escape_string($con, $_GET['id']);
-$sort_order='';
-$price_high_selected="";
-$price_low_selected="";
-$new_selected="";
-$old_selected="";
+$sort_order = '';
+$price_high_selected = "";
+$price_low_selected = "";
+$new_selected = "";
+$old_selected = "";
 
-if(isset($_GET['sort'])){
-    $sort= mysqli_real_escape_string($con, $_GET['sort']);
-    if($sort=="price_high"){
-        $sort_order=" ORDER BY product.price DESC ";
-        $price_high_selected="selected";
-    }if($sort=="price_low"){
-        $sort_order=" ORDER BY product.price ASC ";
-        $price_low_selected="selected";
-    }if($sort=="new"){
-        $sort_order=" ORDER BY product.id DESC ";
-        $new_selected="selected";
-    }if($sort=="old"){
-        $sort_order=" ORDER BY product.id ASC ";
-        $old_selected="selected";
+if (isset($_GET['sort'])) {
+    $sort = mysqli_real_escape_string($con, $_GET['sort']);
+    if ($sort == "price_high") {
+        $sort_order = " ORDER BY product.price DESC ";
+        $price_high_selected = "selected";
+    }
+    if ($sort == "price_low") {
+        $sort_order = " ORDER BY product.price ASC ";
+        $price_low_selected = "selected";
+    }
+    if ($sort == "new") {
+        $sort_order = " ORDER BY product.id DESC ";
+        $new_selected = "selected";
+    }
+    if ($sort == "old") {
+        $sort_order = " ORDER BY product.id ASC ";
+        $old_selected = "selected";
     }
 }
 if ($cat_id > 0) {
-    $get_product = get_product($con, '', $cat_id,'','',$sort_order);
+    $get_product = get_product($con, '', $cat_id, '', '', $sort_order);
 } else {
 ?>
     <script>
@@ -96,13 +99,15 @@ if ($cat_id > 0) {
                                                         <img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $list['image'] ?>" alt="product images">
                                                     </a>
                                                 </div>
-                                                <!-- <div class="fr__hover__info">
-                                                        <ul class="product__action">
-                                                            <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
-                                                            <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
-                                                            <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                                        </ul>
-                                                    </div> -->
+                                                <div class="fr__hover__info">
+                                                    <ul class="product__action">
+                                                        <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
+
+                                                        <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
+
+                                                        <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
+                                                    </ul>
+                                                </div>
                                                 <div class="fr__product__inner">
                                                     <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
                                                     <ul class="fr__pro__prize">

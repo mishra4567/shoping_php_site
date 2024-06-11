@@ -3,8 +3,8 @@ require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
 $str = mysqli_real_escape_string($con, $_GET['str']);
-if ($str!='') {
-    $get_product = get_product($con, '','','',$str);
+if ($str != '') {
+    $get_product = get_product($con, '', '', '', $str);
 } else {
 ?>
     <script>
@@ -44,7 +44,7 @@ if ($str!='') {
             ?>
                 <div class="col-lg-9 col-lg-push-3 col-md-9 col-md-push-3 col-sm-12 col-xs-12">
                     <div class="htc__product__rightidebar">
-                        
+
                         <!-- Start Product View -->
                         <div class="row">
                             <div class="shop__grid__view__wrap">
@@ -60,13 +60,15 @@ if ($str!='') {
                                                         <img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $list['image'] ?>" alt="product images">
                                                     </a>
                                                 </div>
-                                                <!-- <div class="fr__hover__info">
-                                                        <ul class="product__action">
-                                                            <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
-                                                            <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
-                                                            <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                                        </ul>
-                                                    </div> -->
+                                                <div class="fr__hover__info">
+                                                    <ul class="product__action">
+                                                        <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
+
+                                                        <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
+
+                                                        <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
+                                                    </ul>
+                                                </div>
                                                 <div class="fr__product__inner">
                                                     <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
                                                     <ul class="fr__pro__prize">
@@ -152,9 +154,9 @@ if ($str!='') {
                     </div>
                 </div>
             <?php  } else {
-            
+
             ?>
-            <div><strong>Data can't find</strong></div>
+                <div><strong>Data can't find</strong></div>
                 <script>
                     // window.location.href = '404.php';
                 </script>

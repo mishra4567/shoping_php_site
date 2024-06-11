@@ -89,9 +89,9 @@ include_once("./top-inc.php");
                                 </div>
                                 <div class="fr__hover__info">
                                     <ul class="product__action">
-                                        <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+                                        <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
 
-                                        <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                        <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
 
                                         <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
                                     </ul>

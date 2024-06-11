@@ -54,3 +54,8 @@ function get_product(
     }
     return $data;
 }
+function wishlist_add($con,$uid,$pid){
+    $added_on = date('y-m-d h:i:s');
+    mysqli_query($con, " INSERT INTO wishlist(user_id,product_id,added_on) values('$uid','$pid','$added_on')");
+
+}
