@@ -126,33 +126,38 @@ include_once("./top-inc.php");
             </div>
         </div>
         <div class="row">
-            <div class="product__wrap clearfix">
-                <!-- Start Single Category -->
-                <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.php">
-                                <img src="images/product/9.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+            <div class="product__list clearfix mt--30">
+                <?php
+                $get_product = get_product($con, 4,'','','','','yes');
+                foreach ($get_product as $list) {
+                ?>
+                    <!-- Start Single Category -->
+                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                        <div class="category">
+                            <div class="ht__cat__thumb">
+                                <a href="product-details.php?id=<?php echo $list['id'] ?>">
+                                    <img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $list['image'] ?>" alt="product images">
+                                </a>
+                            </div>
+                            <div class="fr__hover__info">
+                                <ul class="product__action">
+                                    <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
 
-                                <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                    <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
 
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.php">Special Wood Basket</a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
+                                    <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
+                                </ul>
+                            </div>
+                            <div class="fr__product__inner">
+                                <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
+                                <ul class="fr__pro__prize">
+                                    <li class="old__prize">$<?php echo $list['mrp'] ?></li>
+                                    <li>$<?php echo $list['price'] ?></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php } ?>
                 <!-- multiple("./single-category") -->
                 <!-- End Single Category -->
             </div>

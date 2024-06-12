@@ -14,8 +14,9 @@ $meta_desc = '';
 $status = '';
 $meta_keyword = '';
 $tex = '';
-$image_required = 'required';
+$best_seller = '';
 
+$image_required = 'required';
 $msg = '';
 
 
@@ -37,6 +38,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         $meta_desc = $row['meta_desc'];
         $meta_keyword = $row['meta_keyword'];
         $tex = $row['tex'];
+        $best_seller = $row['best_seller'];
     } else {
         header('location:./product.php');
         die();
@@ -57,6 +59,7 @@ if (isset($_POST['submit'])) {
     $meta_keyword = get_safe_value($con, $_POST['meta_keyword']);
     $tex = get_safe_value($con, $_POST['tex']);
     $meta_title = get_safe_value($con, $_POST['meta_title']);
+    $best_seller = get_safe_value($con, $_POST['best_seller']);
 
     $result = mysqli_query($con, "SELECT * FROM product WHERE name='$name'");
     $check = mysqli_num_rows($result);
@@ -85,17 +88,17 @@ if (isset($_POST['submit'])) {
                 // move_uploaded_file($_FILES['image']['tmp_name'], '../media/product/' . $image);
                 move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH . $image);
                 $update_sql = "UPDATE  product SET categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',
-                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',image='$image' WHERE id='$id'";
+                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',image='$image',best_seller='$best_seller' WHERE id='$id'";
             } else {
-                $update_sql="UPDATE  product SET categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',
-                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title' WHERE id='$id'";
+                $update_sql = "UPDATE  product SET categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',
+                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',best_seller='$best_seller' WHERE id='$id'";
             }
-            mysqli_query($con,$update_sql);
+            mysqli_query($con, $update_sql);
         } else {
             $image = rand(1111111111, 9999999999) . '_' . $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH . $image);
-            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,status) VALUE 
-            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','0')");
+            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,best_seller,status) VALUE 
+            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','$best_seller','0')");
         }
         header('location:./product.php');
         die();
@@ -127,9 +130,9 @@ include("./sideber.inc.php");
                                     $result = mysqli_query($con, "SELECT id,categories FROM categories WHERE STATUS='1' ORDER BY categories ASC");
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         if ($row['id'] == $categories_id) {
-                                            echo "<option selected value=".$row['id'].">".$row['categories']."</option>";
+                                            echo "<option selected value=" . $row['id'] . ">" . $row['categories'] . "</option>";
                                         } else {
-                                            echo "<option value=".$row['id'].">".$row['categories']."</option>";
+                                            echo "<option value=" . $row['id'] . ">" . $row['categories'] . "</option>";
                                         }
                                     } ?>
                                 </select>
@@ -137,6 +140,25 @@ include("./sideber.inc.php");
                             <div class="form-group mt-3 ">
                                 <label for="product" class="from-control-label fw-bold">Product name</label>
                                 <input type="text" name="name" class="form-control" id="" placeholder="Enter product name" value="<?php echo $name ?>">
+                            </div>
+                            <div class="form-group mt-3 ">
+                                <label for="categories" class="from-control-label fw -bold">Best Seller</label>
+                                <select name="best_seller" id="" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <?php
+                                    if ($best_seller == 1) {
+                                        echo '<option value="1" selected>Yes</option>
+                                              <option value="0">No</option>';
+                                    } elseif ($best_seller == 0) {
+                                        echo '<option value="1">Yes</option>
+                                              <option value="0" selected>No</option>';
+                                    } else {
+                                        echo '<option value="1">Yes</option>
+                                              <option value="0">No</option>';
+                                    }
+                                    ?>
+
+                                </select>
                             </div>
                             <div class="form-group mt-3 ">
                                 <label for="mrp" class="from-control-label fw-bold">Mrp</label>
@@ -156,7 +178,7 @@ include("./sideber.inc.php");
                             </div>
                             <div class="form-group mt-3 ">
                                 <label for="short_desc" class="from-control-label fw -bold">Short description</label>
-                                <textarea name="short_desc" class="form-control" id="" rows="5"  placeholder="Enter Short description"><?php echo $short_desc ?></textarea>
+                                <textarea name="short_desc" class="form-control" id="" rows="5" placeholder="Enter Short description"><?php echo $short_desc ?></textarea>
                             </div>
                             <div class="form-group mt-3 ">
                                 <label for="description" class="from-control-label fw-bold">Product description</label>

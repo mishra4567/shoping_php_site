@@ -42,7 +42,7 @@ $res = mysqli_query($con, "SELECT product.name,product.image,product.price,produ
     <div class="container">
         <div class="row">
             <?php
-            if (count($_SESSION['cart']) > 0) {
+            // if (count($_SESSION['cart']) > 0) {
             ?>
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <form action="#">
@@ -91,12 +91,12 @@ $res = mysqli_query($con, "SELECT product.name,product.image,product.price,produ
                     </form>
                 </div>
             <?php
-            } else {
+            // } else {
             ?>
-                <div><strong>Please enter few product in cart</strong></div>
+                <!-- <div><strong>Please enter few product in cart</strong></div> -->
 
             <?php
-            }
+            // }
             ?>
         </div>
     </div>
