@@ -28,17 +28,17 @@ function user_register() {
             type: 'post',
             data: 'name=' + name + '&email=' + email + '&mobail=' + mobail + '&password=' + password,
             success: function (result) {
-                if(result=='present'){
+                if (result == 'present') {
                     jQuery('#email_error').html('Email id already present');
                 }
-                if(result=='ensert'){
+                if (result == 'ensert') {
                     jQuery('.register_msg p').html('Register Successfull');
                 }
             }
         })
     }
 }
-function user_login(){
+function user_login() {
     jQuery('.field_error').html('');
     var email = jQuery("#login_email").val();
     var password = jQuery("#login_password").val();
@@ -52,59 +52,89 @@ function user_login(){
         is_error = 'Yes';
         // alert ('Please enter password');
     }
-    if(is_error==''){
+    if (is_error == '') {
         jQuery.ajax({
-            url:'./login_submit.php',
-            type:'post',
-            data:'email='+email+'&password='+password,
+            url: './login_submit.php',
+            type: 'post',
+            data: 'email=' + email + '&password=' + password,
             success: function (result) {
-                if(result=='worng'){
+                if (result == 'worng') {
                     jQuery('.login_msg p').html('Enter Valid Login details');
                 }
-                if(result=='valid'){
-                    window.location.href= window.location.href;
+                if (result == 'valid') {
+                    window.location.href = window.location.href;
                 }
             }
         })
     }
 }
 
-function manage_cart(pid,type){
-    if(type=='update'){
-        var qty=jQuery("#"+pid+"qty").val();
-    }else{
-        var qty=jQuery("#qty").val();
+function manage_cart(pid, type) {
+    if (type == 'update') {
+        var qty = jQuery("#" + pid + "qty").val();
+    } else {
+        var qty = jQuery("#qty").val();
     }
     jQuery.ajax({
-        url:'manage_cart.php',
-        type:'post',
-        data:'pid='+pid+'&qty='+qty+'&type='+type,
-        success:function(result){
-            if(type=='update' || type=='remove'){
-                window.location.href=window.location.href;
+        url: 'manage_cart.php',
+        type: 'post',
+        data: 'pid=' + pid + '&qty=' + qty + '&type=' + type,
+        success: function (result) {
+            if (type == 'update' || type == 'remove') {
+                window.location.href = window.location.href;
             }
             jQuery('.htc__qua').html(result);
         }
     })
 }
 
-function sort_product_drop(cat_id,site_path){
-    var sort_product_id=jQuery('#sort_product_id').val();
-    window.location.href=site_path+"categories.php?id="+cat_id+"&sort="+sort_product_id;
+function sort_product_drop(cat_id, site_path) {
+    var sort_product_id = jQuery('#sort_product_id').val();
+    window.location.href = site_path + "categories.php?id=" + cat_id + "&sort=" + sort_product_id;
     // alert (cat_id);
 }
 
-function wishlist_manage(pid,type){
+function wishlist_manage(pid, type) {
     jQuery.ajax({
-        url:'wishlist_manage.php',
-        type:'post',
-        data:'pid='+pid+'&type='+type,
-        success:function(result){
-            if(result=='not_login'){
-                window.location.href='login.php';
-            }else{
+        url: 'wishlist_manage.php',
+        type: 'post',
+        data: 'pid=' + pid + '&type=' + type,
+        success: function (result) {
+            if (result == 'not_login') {
+                window.location.href = 'login.php';
+            } else {
                 jQuery('.htc__wishlist').html(result)
             }
         }
     })
+}
+// email verification
+function email_sent_otp() {
+    jQuery('#email_error').html('');
+    var email = jQuery('#email').val();
+    if (email == '') {
+        jQuery('#email_error').html('Please enter email id');
+    } else {
+        jQuery.ajax({
+            url:'send_otp.php',
+            type:'post',
+            data:'email='+email+'&type=email',
+            success:function(result){
+                
+            }
+        });
+        jQuery('#email').attr('disabled', true);
+        jQuery('.email_verify_otp').show();
+        jQuery('.email_sent_otp').hide();
+    }
+}
+function email_verify_otp() {
+    jQuery('#email_error').html('');
+    var email_otp = jQuery('#email_otp').val();
+    if (email_otp == '') {
+        jQuery('#email_error').html('Please enter otp');
+    } else {
+    jQuery('.email_verify_otp').hide();
+    jQuery('#email_otp_result').html('Email id verified')
+}
 }

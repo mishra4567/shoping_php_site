@@ -54,7 +54,12 @@
   width: 17px;
   margin-left: -10px;
 }
-
+.email_verify_otp{
+  display: none;
+}
+.height_60px{
+  height: 60px;
+}
 /* .header--3 .htc__shopping__wish {
   margin-right: 55px;
 } 
