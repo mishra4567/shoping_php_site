@@ -98,7 +98,14 @@ if (isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN'] == 'yes') {
 							</div>
 							<div class="single-contact-form">
 								<div class="contact-box name">
-									<input type="text" name="mobail" id="mobail" placeholder="Your Mobile*" style="width:100%">
+									<input type="text" name="mobail" id="mobail" placeholder="Your Mobile*" style="width:50%">
+
+									<button type="button" class="fv-btn height_60px mobail_sent_otp" onclick="mobail_sent_otp()">Send otp</button>
+									
+									<input type="text" class="mobail_verify_otp" id="mobail_otp" placeholder="OTP*" style="width:50%">
+									<button type="button" class="fv-btn height_60px mobail_verify_otp" onclick="mobail_verify_otp()">Verify otp</button>
+								
+                                    <span id="mobail_otp_result"></span>
 									</div>
 								<span class="field_error" id="mobail_error"></span>
 							</div>
@@ -110,7 +117,7 @@ if (isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN'] == 'yes') {
 							</div>
 
 							<div class="contact-btn">
-								<button type="button" class="fv-btn" onclick="user_register()">Register</button>
+								<button type="button" class="fv-btn" id="btn_register" onclick="user_register()" disabled>Register</button>
 							</div>
 						</form>
 						<div class="form-output register_msg">
@@ -123,6 +130,8 @@ if (isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN'] == 'yes') {
 
 		</div>
 </section>
+<input class="is_verified" type="textbox" name="" id="is_email_verified">
+<input class="is_verified" type="textbox" name="" id="is_mobail_verified">
 <!-- End Contact Area -->
 <!-- End Banner Area -->
 <!-- Start Footer Area -->

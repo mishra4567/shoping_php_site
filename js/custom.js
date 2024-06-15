@@ -31,6 +31,9 @@ function user_register() {
                 if (result == 'present') {
                     jQuery('#email_error').html('Email id already present');
                 }
+                if (result == 'mobail_present') {
+                    jQuery('#mobail_error').html('Mobail number already present');
+                }
                 if (result == 'ensert') {
                     jQuery('.register_msg p').html('Register Successfull');
                 }
@@ -115,9 +118,9 @@ function email_sent_otp() {
     if (email == '') {
         jQuery('#email_error').html('Please enter email id');
     } else {
-        jQuery('.email_send_otp').html('Please Wait...');
-        jQuery('.email_send_otp').attr('disabled',true);
-        jQuery('.email_send_otp')
+        jQuery('.email_sent_otp').html('Please Wait...');
+        jQuery('.email_sent_otp').attr('disabled',true);
+        jQuery('.email_sent_otp')
         jQuery.ajax({
             url: 'send_otp.php',
             type: 'post',
@@ -127,9 +130,14 @@ function email_sent_otp() {
                     jQuery('#email').attr('disabled', true);
                     jQuery('.email_verify_otp').show();
                     jQuery('.email_sent_otp').hide();
+                }else if(result=='present'){
+                    jQuery('.email_sent_otp').html('Send OTP');
+                    jQuery('.email_sent_otp').attr('disabled',false);
+                    
+                    jQuery('#email_error').html('Email id already exist');
                 } else {
-                    jQuery('.email_send_otp').html('Send OTP');
-                    jQuery('.email_send_otp').attr('disabled',false);
+                    jQuery('.email_sent_otp').html('Send OTP');
+                    jQuery('.email_sent_otp').attr('disabled',false);
                     jQuery('#email_error').html('Please try after sometime');
                 }
             }
@@ -151,6 +159,10 @@ function email_verify_otp() {
                 if (result == 'done') {
                     jQuery('.email_verify_otp').hide();
                     jQuery('#email_otp_result').html('Email id verified')
+                    jQuery('#is_email_verified').val('1');
+                    if(jQuery('#is_mobail_verified').val()==1){
+                        jQuery('#btn_register').attr('disabled',false);
+                    }
                     // jQuery('#email').attr('disabled', true);
                     // jQuery('.email_verify_otp').show();
                     // jQuery('.email_sent_otp').hide();
@@ -161,5 +173,65 @@ function email_verify_otp() {
         });
         // jQuery('.email_verify_otp').hide();
         // jQuery('#email_otp_result').html('Email id verified')
+    }
+}
+
+// mobail verification
+function mobail_sent_otp() {
+    jQuery('#mobail_error').html('');
+    var mobail = jQuery('#mobail').val();
+    if (mobail == '') {
+        jQuery('#mobail_error').html('Please enter mobail number');
+    } else {
+        jQuery('.mobail_sent_otp').html('Please Wait...');
+        jQuery('.mobail_sent_otp').attr('disabled',true);
+        jQuery('.mobail_sent_otp')
+        jQuery.ajax({
+            url: 'send_otp.php',
+            type: 'post',
+            data: 'mobail=' + mobail + '&type=mobail',
+            success: function (result) {
+                if (result == 'done') {
+                    jQuery('#mobail').attr('disabled', true);
+                    jQuery('.mobail_verify_otp').show();
+                    jQuery('.mobail_sent_otp').hide();
+                }else if(result=='mobail_present'){
+                    jQuery('.mobail_sent_otp').html('Send OTP');
+                    jQuery('.mobail_sent_otp').attr('disabled',false);
+                    
+                    jQuery('#mobail_error').html('mobail number already exist');
+                } else {
+                    jQuery('.mobail_sent_otp').html('Send OTP');
+                    jQuery('.mobail_sent_otp').attr('disabled',false);
+                    jQuery('#mobail_error').html('Please try after sometime');
+                }
+            }
+        });
+
+    }
+}
+function mobail_verify_otp() {
+    jQuery('#mobail_error').html('');
+    var mobail_otp = jQuery('#mobail_otp').val();
+    if (mobail_otp == '') {
+        jQuery('#mobail_error').html('Please enter otp');
+    } else {
+        jQuery.ajax({
+            url: 'check_otp.php',
+            type: 'post',
+            data: 'otp=' + mobail_otp + '&type=mobail',
+            success: function (result) {
+                if (result == 'done') {
+                    jQuery('.mobail_verify_otp').hide();
+                    jQuery('#mobail_otp_result').html('mobail number verified')
+                    jQuery('#is_mobail_verified').val('1');
+                    if(jQuery('#is_email_verified').val()==1){
+                        jQuery('#btn_register').attr('disabled',false);
+                    }
+                } else {
+                    jQuery('#mobail_error').html('Please enter valid OTP');
+                }
+            }
+        });
     }
 }

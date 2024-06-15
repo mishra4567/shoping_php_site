@@ -12,3 +12,10 @@ if ($type == 'email') {
         echo "no";
     }
 }
+if ($type == 'mobail') {
+    if($otp==$_SESSION['MOBAIL_OTP']){
+        echo "done";
+    }else{
+        echo "no";
+    }
+}

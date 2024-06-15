@@ -11,6 +11,12 @@ $type = get_safe_value($con, $_POST['type']);
 
 if ($type == 'email') {
     $email = get_safe_value($con, $_POST['email']);
+    $check_user = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE email='$email'"));
+    
+    if ($check_user > 0) {
+        echo "present";
+        die();
+    }
     $otp = rand(1111, 9999);
     $_SESSION['EMAIL_OTP'] = $otp;
     $html = "$otp is your One Time Password";
@@ -57,4 +63,43 @@ if ($type == 'email') {
     } catch (Exception $e) {
         // echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+}
+if($type=='mobail'){
+    $number=get_safe_value($con,$_POST['mobail']);
+    $check_mobail = mysqli_num_rows(mysqli_query($con, "SELECT * FROM users WHERE mobail='$number'"));
+    $mobail = get_safe_value($con, '91'.$number);
+
+    if($check_mobail>0){
+        echo "mobail_present";
+        die();
+    } 
+    $otp = rand(1111, 9999);
+    $_SESSION['MOBAIL_OTP'] = $otp;
+    $message="$otp is your otp";
+
+
+        // Account details
+	$apiKey = urlencode('NTU2ZDYxNGE2ZDc1NGE3MjQzNTg0YTY3NWE0ZDY4Njk=');
+	
+	// Message details
+	$numbers = array($mobail);
+	$sender = urlencode('TXTLCL');
+	$message = rawurlencode($message);
+ 
+	$numbers = implode(',', $numbers);
+ 
+	// Prepare data for POST request
+	$data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+ 
+	// Send the POST request with cURL
+	$ch = curl_init('https://api.textlocal.in/send/');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$response = curl_exec($ch);
+	curl_close($ch);
+	
+	// Process your response here
+	// echo $response;
+    echo "done";
 }

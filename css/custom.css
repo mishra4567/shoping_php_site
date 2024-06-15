@@ -57,6 +57,12 @@
 .email_verify_otp{
   display: none;
 }
+.mobail_verify_otp{
+  display: none;
+}
+.is_verified{
+  display: none;
+}
 .height_60px{
   height: 60px;
 }

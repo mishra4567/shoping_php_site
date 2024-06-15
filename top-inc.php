@@ -38,6 +38,7 @@ if ($mypage == 'product-details.php') {
 if($mypage=='contact.php'){
     $meta_title="Contact Us";
 }
+echo $_SESSION['MOBAIL_OTP'];
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
