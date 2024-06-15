@@ -27,3 +27,8 @@ Then creat your biginer app/website and same time a password creat for you bigin
 -:BUT:-
 Mobail otp sender using (Textlocal API)
 Mobail Number OTP can't work Xampp
+But
+work with Xampp
+you first upen 2-tab your browser
+when you send 1tab (login2nd.php) mobail otp verification
+Then you relload 2nd tab (what you want) you se thet tab a otp you see 
