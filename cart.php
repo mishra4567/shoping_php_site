@@ -10,7 +10,13 @@ require_once("./add_to_cart.inc.php");
 
 
 include_once("./top-inc.php");
-
+if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
+    ?>
+        <script>
+            window.location.href = 'index.php';
+        </script>
+    <?php
+    }
 ?>
 <!-- End Offset Wrapper -->
 <!-- Start Bradcaump area -->

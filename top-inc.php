@@ -38,7 +38,7 @@ if ($mypage == 'product-details.php') {
 if($mypage=='contact.php'){
     $meta_title="Contact Us";
 }
-echo $_SESSION['MOBAIL_OTP'];
+// echo $_SESSION['MOBAIL_OTP'];
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -141,7 +141,7 @@ echo $_SESSION['MOBAIL_OTP'];
                                         <?php
                                         } else {
                                         ?>
-                                            <a class="a_line" title="Login/Register" href="./login.php"><i class="icon-login icons"></i></a>
+                                            <a class="a_line" title="Login/Register" href="./login2nd.php"><i class="icon-login icons"></i></a>
                                         <?php } ?>
                                     </div>
                                     <div class="htc__shopping__cart">

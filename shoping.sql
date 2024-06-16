@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2024 at 09:17 AM
+-- Generation Time: Jun 16, 2024 at 07:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -122,7 +122,8 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_type`, `total_price`, `payment_status`, `order_status`, `added_on`, `txnid`, `milhpayid`, `payu_status`) VALUES
 (1, 6, 'marishda', 'marishda', 721449, 'payU', 30002, 'pending', 1, '2024-05-25 07:40:31', '', '', ''),
-(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'pending', 1, '2024-06-11 01:40:26', '', '', '');
+(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'pending', 1, '2024-06-11 01:40:26', '', '', ''),
+(3, 9, 'kalkata, kalkata', 'kalkata', 700001, 'COD', 3599, 'success', 1, '2024-06-15 05:36:00', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -152,7 +153,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `ad
 (2, 1, 3, 5, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (3, 1, 2, 5, 90, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (4, 2, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(5, 2, 4, 1, 2879, '0000-00-00 00:00:00', 0, 0, 0, 0);
+(5, 2, 4, 1, 2879, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(6, 3, 6, 1, 3599, '0000-00-00 00:00:00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -233,12 +235,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobail`, `added_on`) VALUES
-(1, 'pritam', 'a@gmail.com', '123456', '9609379300', '2024-05-01 23:59:28'),
-(3, 'admin', 'mishrapritam831@gmail.com', '646464', '56464646', '2024-05-20 06:42:19'),
+(1, 'pritam', 'a@gmail.com', '123456', '', '2024-05-01 23:59:28'),
 (4, 'admin', 'e@gmail.com', '454545', '5454545', '2024-05-20 06:44:29'),
 (5, 'admin', 'a@gmail.com1234', '54545', '46464654654', '2024-05-20 06:41:58'),
 (6, 'admin', 'z@gmail.com', '54545', '46464654654', '2024-05-20 06:42:52'),
-(7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37');
+(7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37'),
+(13, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', '54578454', '9609379300', '2024-06-16 06:57:54');
 
 -- --------------------------------------------------------
 
@@ -252,6 +254,13 @@ CREATE TABLE `wishlist` (
   `product_id` int(11) NOT NULL,
   `added_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
+(27, 9, 5, '2024-06-15 05:35:32');
 
 --
 -- Indexes for dumped tables
@@ -337,13 +346,13 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -361,13 +370,13 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

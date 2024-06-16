@@ -235,3 +235,29 @@ function mobail_verify_otp() {
         });
     }
 }
+// forgot password
+
+function forgot_password() {
+    jQuery('#email_error').html('');
+    var email = jQuery('#email').val();
+    if (email == '') {
+        jQuery('#email_error').html('Please enter email id');
+    } else{
+        jQuery('#btn_submit').html('Please wait...');
+        jQuery('#btn_submit').attr('disabled',true);
+        jQuery.ajax({
+            url:'forgot_password_submit.php',
+            type:'post',
+            data:'email='+email,
+            success:function(result){
+                jQuery('#email').val('');
+                jQuery('#email_error').html(result);    
+                jQuery('#btn_submit').html('Submit');
+                jQuery('#btn_submit').attr('disabled',false);
+            }
+        })
+    }
+        
+
+    
+}

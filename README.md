@@ -32,3 +32,7 @@ work with Xampp
 you first upen 2-tab your browser
 when you send 1tab (login2nd.php) mobail otp verification
 Then you relload 2nd tab (what you want) you se thet tab a otp you see 
+
+FORGOT PASSWORD 
+your password send your email id
+
