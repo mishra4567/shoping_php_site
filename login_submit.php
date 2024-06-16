@@ -10,7 +10,7 @@ if ($check_user > 0) {
     $row=mysqli_fetch_assoc($res);
     $_SESSION['USER_LOGIN']='yes';
     $_SESSION['USER_ID']=$row['id'];
-    $_SESSION['USER_NAME']=['name'];
+    $_SESSION['USER_NAME']=$row['name'];
     if(isset($_SESSION['WISHLIST_ID']) && $_SESSION['WISHLIST_ID']!=''){
         wishlist_add($con,$_SESSION['USER_ID'],$_SESSION['WISHLIST_ID']);
         unset($_SESSION['WISHLIST_ID']);

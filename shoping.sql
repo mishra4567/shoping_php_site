@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 07:15 AM
+-- Generation Time: Jun 16, 2024 at 01:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -240,7 +240,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobail`, `added_on`) VA
 (5, 'admin', 'a@gmail.com1234', '54545', '46464654654', '2024-05-20 06:41:58'),
 (6, 'admin', 'z@gmail.com', '54545', '46464654654', '2024-05-20 06:42:52'),
 (7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37'),
-(13, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', '54578454', '9609379300', '2024-06-16 06:57:54');
+(13, '', 'gyhfvghfcvyttfyghfvgh@gmail.com', '789456', '9609379300', '2024-06-16 06:57:54');
 
 -- --------------------------------------------------------
 

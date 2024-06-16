@@ -134,6 +134,7 @@ if($mypage=='contact.php'){
                                                     <ul class="dropdown">
                                                         <li><a href="./wishlist.php"> wishlist &nbsp;<i class="icon-heart icons"></i></a></li>
                                                         <li><a href="./myorder.php"> My Order &nbsp;<i class="icon-basket-loaded"></i></a></li>
+                                                        <li><a href="./profile.php"> Profile &nbsp;<i class="icon-user"></i></a></li>
                                                         <li><a href="./logout.php">Log Out &nbsp; <i class="icon-logout icons"></i></a></li>
                                                     </ul>
                                                 </li>

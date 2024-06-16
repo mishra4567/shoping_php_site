@@ -119,7 +119,7 @@ function email_sent_otp() {
         jQuery('#email_error').html('Please enter email id');
     } else {
         jQuery('.email_sent_otp').html('Please Wait...');
-        jQuery('.email_sent_otp').attr('disabled',true);
+        jQuery('.email_sent_otp').attr('disabled', true);
         jQuery('.email_sent_otp')
         jQuery.ajax({
             url: 'send_otp.php',
@@ -130,14 +130,14 @@ function email_sent_otp() {
                     jQuery('#email').attr('disabled', true);
                     jQuery('.email_verify_otp').show();
                     jQuery('.email_sent_otp').hide();
-                }else if(result=='present'){
+                } else if (result == 'present') {
                     jQuery('.email_sent_otp').html('Send OTP');
-                    jQuery('.email_sent_otp').attr('disabled',false);
-                    
+                    jQuery('.email_sent_otp').attr('disabled', false);
+
                     jQuery('#email_error').html('Email id already exist');
                 } else {
                     jQuery('.email_sent_otp').html('Send OTP');
-                    jQuery('.email_sent_otp').attr('disabled',false);
+                    jQuery('.email_sent_otp').attr('disabled', false);
                     jQuery('#email_error').html('Please try after sometime');
                 }
             }
@@ -160,8 +160,8 @@ function email_verify_otp() {
                     jQuery('.email_verify_otp').hide();
                     jQuery('#email_otp_result').html('Email id verified')
                     jQuery('#is_email_verified').val('1');
-                    if(jQuery('#is_mobail_verified').val()==1){
-                        jQuery('#btn_register').attr('disabled',false);
+                    if (jQuery('#is_mobail_verified').val() == 1) {
+                        jQuery('#btn_register').attr('disabled', false);
                     }
                     // jQuery('#email').attr('disabled', true);
                     // jQuery('.email_verify_otp').show();
@@ -184,7 +184,7 @@ function mobail_sent_otp() {
         jQuery('#mobail_error').html('Please enter mobail number');
     } else {
         jQuery('.mobail_sent_otp').html('Please Wait...');
-        jQuery('.mobail_sent_otp').attr('disabled',true);
+        jQuery('.mobail_sent_otp').attr('disabled', true);
         jQuery('.mobail_sent_otp')
         jQuery.ajax({
             url: 'send_otp.php',
@@ -195,14 +195,14 @@ function mobail_sent_otp() {
                     jQuery('#mobail').attr('disabled', true);
                     jQuery('.mobail_verify_otp').show();
                     jQuery('.mobail_sent_otp').hide();
-                }else if(result=='mobail_present'){
+                } else if (result == 'mobail_present') {
                     jQuery('.mobail_sent_otp').html('Send OTP');
-                    jQuery('.mobail_sent_otp').attr('disabled',false);
-                    
+                    jQuery('.mobail_sent_otp').attr('disabled', false);
+
                     jQuery('#mobail_error').html('mobail number already exist');
                 } else {
                     jQuery('.mobail_sent_otp').html('Send OTP');
-                    jQuery('.mobail_sent_otp').attr('disabled',false);
+                    jQuery('.mobail_sent_otp').attr('disabled', false);
                     jQuery('#mobail_error').html('Please try after sometime');
                 }
             }
@@ -225,8 +225,8 @@ function mobail_verify_otp() {
                     jQuery('.mobail_verify_otp').hide();
                     jQuery('#mobail_otp_result').html('mobail number verified')
                     jQuery('#is_mobail_verified').val('1');
-                    if(jQuery('#is_email_verified').val()==1){
-                        jQuery('#btn_register').attr('disabled',false);
+                    if (jQuery('#is_email_verified').val() == 1) {
+                        jQuery('#btn_register').attr('disabled', false);
                     }
                 } else {
                     jQuery('#mobail_error').html('Please enter valid OTP');
@@ -242,22 +242,78 @@ function forgot_password() {
     var email = jQuery('#email').val();
     if (email == '') {
         jQuery('#email_error').html('Please enter email id');
-    } else{
+    } else {
         jQuery('#btn_submit').html('Please wait...');
-        jQuery('#btn_submit').attr('disabled',true);
+        jQuery('#btn_submit').attr('disabled', true);
         jQuery.ajax({
-            url:'forgot_password_submit.php',
-            type:'post',
-            data:'email='+email,
-            success:function(result){
+            url: 'forgot_password_submit.php',
+            type: 'post',
+            data: 'email=' + email,
+            success: function (result) {
                 jQuery('#email').val('');
-                jQuery('#email_error').html(result);    
+                jQuery('#email_error').html(result);
                 jQuery('#btn_submit').html('Submit');
-                jQuery('#btn_submit').attr('disabled',false);
+                jQuery('#btn_submit').attr('disabled', false);
             }
         })
     }
-        
+}
+// Update Profile
+function update_profile() {
+    jQuery('.field_error').html('');
+    var name = jQuery('#name').val();
+    if (name == '') {
+        jQuery('#name_error').html('Please enter your name');
+    } else {
+        jQuery('#btn_submit').html('Please wait...');
+        jQuery('#btn_submit').attr('disabled', true);
+        jQuery.ajax({
+            url: 'update_profile.php',
+            type: 'post',
+            data: 'name=' + name,
+            success: function (result) {
+                jQuery('#name_error').html(result);
+                jQuery('#btn_submit').html('Update');
+                jQuery('#btn_submit').attr('disabled', false);
+            }
+        })
+    }
+}
+// Update Profile Password
+function update_password() {
+    jQuery('.field_error').html('');
+    var current_password = jQuery('#current_password').val();
+    var new_password = jQuery('#new_password').val();
+    var confirm_new_password = jQuery('#confirm_new_password').val();
+    var is_error = '';
 
-    
+    if (current_password == '') {
+        jQuery('#current_password_error').html('Please enter current password');
+        is_error = 'yes';
+    } if (new_password == '') {
+        jQuery('#new_password_error').html('Please enter new password');
+        is_error = 'yes';
+    } if (confirm_new_password == '') {
+        jQuery('#confirm_new_password_error').html('Please enter confirm new password');
+        is_error = 'yes';
+    }
+    if (new_password!='' && confirm_new_password!='' && new_password!= confirm_new_password) {
+        jQuery('#confirm_new_password_error').html('Please enter same password');
+        is_error = 'yes';
+    }
+    if (is_error == '') {
+        jQuery('#btn_update_password').html('Please wait...');
+        jQuery('#btn_update_password').attr('disabled', true);
+        jQuery.ajax({
+            url: 'update_password.php',
+            type: 'post',
+            data: 'current_password=' + current_password + '&new_password=' + new_password,
+            success: function (result) {
+                jQuery('#current_password_error').html(result);
+                jQuery('#btn_update_password').html('Update');
+                jQuery('#btn_update_password').attr('disabled', false);
+                jQuery('#frmPassword')[0].reset();
+            }
+        })
+    }
 }

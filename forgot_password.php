@@ -38,7 +38,7 @@ if (isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN'] == 'yes') {
 				<div class="contact-form-wrap mt--60">
 					<div class="col-xs-12">
 						<div class="contact-title">
-							<h2 class="title__line--6">Foroet Password</h2>
+							<h2 class="title__line--6">Forgot Password</h2>
 						</div>
 					</div>
 					<div class="col-xs-12">
