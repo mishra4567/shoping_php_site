@@ -24,7 +24,7 @@ function user_register() {
     }
     if (is_error == '') {
         jQuery.ajax({
-            url: './register_submit.php',
+            url: 'register_submit.php',
             type: 'post',
             data: 'name=' + name + '&email=' + email + '&mobail=' + mobail + '&password=' + password,
             success: function (result) {
@@ -57,7 +57,7 @@ function user_login() {
     }
     if (is_error == '') {
         jQuery.ajax({
-            url: './login_submit.php',
+            url: 'login_submit.php',
             type: 'post',
             data: 'email=' + email + '&password=' + password,
             success: function (result) {

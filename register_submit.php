@@ -14,7 +14,7 @@ if ($check_user > 0) {
 }elseif($check_mobail>0){
     echo "mobail_present";
 } else {
-    $added_on = date('y-m-d h:i:s');
+    $added_on = date('Y-m-d h:i:s');
     mysqli_query($con, "INSERT INTO users (name,email,mobail,password,added_on) VALUES ('$name','$email','$mobail','$password','$added_on')");
     echo "ensert";
 }

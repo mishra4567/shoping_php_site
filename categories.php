@@ -2,6 +2,13 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
+if(isset($_GET['id']) && $_GET['id'] !=''){
+    ?>
+    <script>
+        window.location.href='index.php';
+    </script>
+    <?php
+}
 $cat_id = mysqli_real_escape_string($con, $_GET['id']);
 $sort_order = '';
 $price_high_selected = "";
@@ -204,26 +211,7 @@ if ($cat_id > 0) {
 </section>
 <!-- End Product Grid -->
 <!-- Start Brand Area -->
-<div class="htc__brand__area bg__cat--4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="ht__brand__inner">
-                    <ul class="brand__list owl-carousel clearfix">
-                        <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/3.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/4.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Brand Area -->
 
+<!-- End Brand Area -->
+<input type="hidden" id="qty" value="1">
 <?php include_once("./footer-inc.php") ?>

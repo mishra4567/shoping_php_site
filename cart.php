@@ -2,21 +2,17 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 require_once("./add_to_cart.inc.php");
-?>
-<!-- <script>
-            window.location.href = 'index.php';
-        </script> -->
-<?php
-
-
 include_once("./top-inc.php");
+
+?>
+<?php
 if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
-    ?>
-        <script>
-            window.location.href = 'index.php';
-        </script>
-    <?php
-    }
+?>
+<script>
+    window.location.href = 'index.php';
+</script>
+<?php
+}
 ?>
 <!-- End Offset Wrapper -->
 <!-- Start Bradcaump area -->
@@ -43,33 +39,33 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
     <div class="container">
         <div class="row">
             <?php
-            if (count($_SESSION['cart']) > 0) {
+            // if (count($_SESSION['cart']) > 0) {
             ?>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <form action="#">
-                        <div class="table-content table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="product-thumbnail">products</th>
-                                        <th class="product-name">name of products</th>
-                                        <th class="product-price">Price</th>
-                                        <th class="product-quantity">Quantity</th>
-                                        <th class="product-subtotal">Total</th>
-                                        <th class="product-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-thumbnail">products</th>
+                                    <th class="product-name">name of products</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($_SESSION['cart'])) {
                                     foreach ($_SESSION['cart'] as $key => $val) {
                                         $productArr = get_product($con, '', '', $key);
-                                        // prx($productArr);
                                         $pname = $productArr[0]['name'];
                                         $mrp = $productArr[0]['mrp'];
                                         $price = $productArr[0]['price'];
                                         $image = $productArr[0]['image'];
                                         $qty = $val['qty'];
-                                    ?>
+                                ?>
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $image ?>" alt="product img" /></a></td>
                                             <td class="product-name"><a href="#"><?php echo $pname ?></a>
@@ -85,33 +81,26 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
                                             <td class="product-subtotal">$<?php echo $qty * $price ?></td>
                                             <td class="product-remove"><a href="javascript:void(0)" onclick="manage_cart('<?php echo $key ?>','remove')"><i class="icon-trash icons"></i></a></td>
                                         </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="buttons-cart--inner">
-                                    <div class="buttons-cart">
-                                        <a href="<?php echo SITE_PATH ?>">Continue Shopping</a>
-                                    </div>
-                                    <div class="buttons-cart checkout--btn">
-                                        <!-- <a href="#">update</a> -->
-                                        <a href="<?php echo SITE_PATH ?>checkout.php">checkout</a>
-                                    </div>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="buttons-cart--inner">
+                                <div class="buttons-cart">
+                                    <a href="<?php echo SITE_PATH ?>">Continue Shopping</a>
+                                </div>
+                                <div class="buttons-cart checkout--btn">
+                                    <!-- <a href="#">update</a> -->
+                                    <a href="<?php echo SITE_PATH ?>checkout.php">checkout</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
-            <?php
-            } else {
-            ?>
-                <div><strong>Please enter few product in cart</strong></div>
-
-            <?php
-            }
-            ?>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

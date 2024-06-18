@@ -3,13 +3,13 @@ require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
 $order_id = get_safe_value($con, $_GET['id']);
-// if (!isset($order_id) == 0) {
-// ?>
-//     <script>
-//         window.location.href = 'myorder.php';
-//     </script>
-// <?php
-// }
+if (!isset($order_id) == 0) {
+?>
+    <script>
+        window.location.href = 'index.php';
+    </script>
+ <?php
+}
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -79,8 +79,6 @@ $order_id = get_safe_value($con, $_GET['id']);
         </div>
     </div>
 </div>
-
-
 <?php
 include_once("./footer-inc.php")
 ?>

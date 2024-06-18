@@ -76,7 +76,7 @@ include_once("./top-inc.php");
             <div class="row">
                 <div class="product__list clearfix mt--30">
                     <?php
-                    $get_product = get_product($con, 4);
+                    $get_product = get_product($con,4);
                     foreach ($get_product as $list) {
                     ?>
                         <!-- Start Single Category -->
@@ -90,14 +90,12 @@ include_once("./top-inc.php");
                                 <div class="fr__hover__info">
                                     <ul class="product__action">
                                         <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
-
                                         <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
-
                                         <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
                                     </ul>
                                 </div>
                                 <div class="fr__product__inner">
-                                    <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
+                                    <h4><a href="product-details.php?id=<?php echo $list['id'] ?>"><?php echo $list['name'] ?></a></h4>
                                     <ul class="fr__pro__prize">
                                         <li class="old__prize">$<?php echo $list['mrp'] ?></li>
                                         <li>$<?php echo $list['price'] ?></li>
@@ -142,14 +140,12 @@ include_once("./top-inc.php");
                             <div class="fr__hover__info">
                                 <ul class="product__action">
                                     <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
-
                                     <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
-
                                     <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
                                 </ul>
                             </div>
                             <div class="fr__product__inner">
-                                <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
+                                <h4><a href="product-details.php?id=<?php echo $list['id'] ?>"><?php echo $list['name'] ?></a></h4>
                                 <ul class="fr__pro__prize">
                                     <li class="old__prize">$<?php echo $list['mrp'] ?></li>
                                     <li>$<?php echo $list['price'] ?></li>
@@ -166,4 +162,5 @@ include_once("./top-inc.php");
 </section>
 <!-- End Product Area -->
 <!-- Start Footer Area -->
+<input type="hidden" id="qty" value="1">
 <?php include_once("./footer-inc.php") ?>

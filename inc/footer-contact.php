@@ -335,7 +335,7 @@
                    alert('Please enter message');
                } else {
                    jQuery.ajax({
-                       url: './send_message.php',
+                       url: 'send_message.php',
                        type: 'post',
                        data: 'name=' + name + '&email=' + email + '&mobail=' + mobail + '&message=' + message,
                        success: function(result) {

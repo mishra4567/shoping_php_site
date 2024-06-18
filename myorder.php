@@ -2,6 +2,13 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
+if(!isset($_SESSION['USER_LOGIN'])){
+?>
+<script>
+    window.location.href='index.php';
+</script>
+<?php 
+}
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -57,7 +64,7 @@ include_once("./top-inc.php");
                                                 <?php echo $row['pincode'] ?>
                                             </td>
                                             <td class="product-add-to-cart"><?php echo $row['payment_type'] ?></td>
-                                            <td class="product-add-to-cart"><?php echo $row['payment_status'] ?></td>
+                                            <td class="product-add-to-cart"><?php echo ucfirst($row['payment_status']) ?></td>
                                             <td class="product-add-to-cart"><?php echo $row['order_status_str'] ?></td>
                                         </tr>
                                     <?php } ?>

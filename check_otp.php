@@ -7,6 +7,7 @@ $otp=get_safe_value($con,$_POST['otp']);
 
 if ($type == 'email') {
     if($otp==$_SESSION['EMAIL_OTP']){
+        unset($_SESSION['EMAIL_OTP']);
         echo "done";
     }else{
         echo "no";
@@ -14,6 +15,7 @@ if ($type == 'email') {
 }
 if ($type == 'mobail') {
     if($otp==$_SESSION['MOBAIL_OTP']){
+        unset($_SESSION['MOBAIL_OTP']);
         echo "done";
     }else{
         echo "no";

@@ -5,7 +5,7 @@ include_once("./top-inc.php");
 if (isset($_SESSION['USER_LOGIN']) && $_SESSION['USER_LOGIN'] == 'yes') {
 ?>
 	<script>
-		window.location.href = 'index.php';
+		window.location.href = 'myorder.php';
 	</script>
 <?php
 }

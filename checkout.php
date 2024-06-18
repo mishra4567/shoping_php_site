@@ -5,7 +5,7 @@ include_once("./top-inc.php");
 if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
 ?>
     <script>
-        window.location.href = 'index.php';
+        // window.location.href = 'index.php';
     </script>
 <?php
 }
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         $payment_status = 'success';
     }
     $order_status = '1';
-    $added_on = date('y-m-d h:i:s');
+    $added_on = date('Y-m-d h:i:s');
     mysqli_query($con, "INSERT INTO `order` (user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on) 
     VALUES ('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on')");
 
@@ -202,7 +202,6 @@ if (isset($_POST['submit'])) {
                         $cart_total = 0;
                         foreach ($_SESSION['cart'] as $key => $val) {
                             $productArr = get_product($con, '', '', $key);
-                            // prx($productArr);
                             $pname = $productArr[0]['name'];
                             $mrp = $productArr[0]['mrp'];
                             $price = $productArr[0]['price'];

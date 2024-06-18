@@ -2,7 +2,7 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 require_once("./add_to_cart.inc.php");
-
+$wishlist_count=0;
 $cat_res = mysqli_query($con, "SELECT * FROM categories WHERE status=1");
 $cat_arr = array();
 while ($row = mysqli_fetch_assoc($cat_res)) {
@@ -15,7 +15,7 @@ $totalProduct = $obj->totalProduct();
 if (isset($_SESSION['USER_LOGIN'])) {
     $uid = $_SESSION['USER_ID'];
     if (isset($_GET['wishlist_id'])) {
-        $wid = $_GET['wishlist_id'];
+		$wid=get_safe_value($con,$_GET['wishlist_id']);
         mysqli_query($con, "DELETE FROM wishlist WHERE id='$wid' AND user_id='$uid'");
     }
     $wishlist_count = mysqli_num_rows(mysqli_query($con, "SELECT product.name,product.image,product.price,product.mrp,wishlist.id FROM product,wishlist WHERE wishlist.product_id=product.id AND wishlist.user_id='$uid'"));

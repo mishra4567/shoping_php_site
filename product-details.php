@@ -2,14 +2,21 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
-
-$product_id = mysqli_real_escape_string($con, $_GET['id']);
-if ($product_id > 0) {
-    $get_product = get_product($con, '', '', $product_id);
-} else {
+if (isset($_GET['id'])) {
+    $product_id = mysqli_real_escape_string($con, $_GET['id']);
+    if ($product_id > 0) {
+        $get_product = get_product($con, '', '', $product_id);
+    } else {
 ?>
+        <script>
+            window.location.href = './index.php';
+        </script>
+    <?php
+    }
+} else {
+    ?>
     <script>
-        window.location.href = './404.php';
+        window.location.href = 'index.php';
     </script>
 <?php
 }
@@ -84,7 +91,7 @@ if ($product_id > 0) {
                                         <option>9</option>
                                         <option>10</option>
                                     </select>
-                                    </p>
+                                </p>
                             </div>
                             <div class="sin__desc align--left">
                                 <p><span>Categories:</span></p>
