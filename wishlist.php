@@ -15,7 +15,7 @@ $uid = $_SESSION['USER_ID'];
 //     $wid=$_GET['id'];
 //     mysqli_query($con,"DELETE FROM wishlist WHERE id='$wid' AND user_id='$uid'");
 // }
-$res = mysqli_query($con, "SELECT product.name,product.image,product.price,product.mrp,wishlist.id AS pid,wishlist.id FROM product,wishlist WHERE wishlist.product_id=product.id AND wishlist.user_id='$uid'");
+$res = mysqli_query($con, "SELECT product.name,product.image,product.price,product.mrp,product.id AS pid,wishlist.id FROM product,wishlist WHERE wishlist.product_id=product.id AND wishlist.user_id='$uid'");
 ?>
 <!-- End Offset Wrapper -->
 <!-- Start Bradcaump area -->
