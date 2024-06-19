@@ -2,7 +2,7 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 require_once("./add_to_cart.inc.php");
-$wishlist_count=0;
+$wishlist_count = 0;
 $cat_res = mysqli_query($con, "SELECT * FROM categories WHERE status=1");
 $cat_arr = array();
 while ($row = mysqli_fetch_assoc($cat_res)) {
@@ -15,7 +15,7 @@ $totalProduct = $obj->totalProduct();
 if (isset($_SESSION['USER_LOGIN'])) {
     $uid = $_SESSION['USER_ID'];
     if (isset($_GET['wishlist_id'])) {
-		$wid=get_safe_value($con,$_GET['wishlist_id']);
+        $wid = get_safe_value($con, $_GET['wishlist_id']);
         mysqli_query($con, "DELETE FROM wishlist WHERE id='$wid' AND user_id='$uid'");
     }
     $wishlist_count = mysqli_num_rows(mysqli_query($con, "SELECT product.name,product.image,product.price,product.mrp,wishlist.id FROM product,wishlist WHERE wishlist.product_id=product.id AND wishlist.user_id='$uid'"));
@@ -25,9 +25,9 @@ $script_name = $_SERVER['SCRIPT_NAME'];
 $script_name_arr = explode('/', $script_name);
 $mypage = $script_name_arr[count($script_name_arr) - 1];
 
-$meta_title="Ecom Web";
-$meta_desc="Shopping";
-$meta_keyword="";
+$meta_title = "Ecom Web";
+$meta_desc = "Shopping";
+$meta_keyword = "";
 if ($mypage == 'product-details.php') {
     $product_id = get_safe_value($con, $_GET['id']);
     $product_meta = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM product WHERE id='$product_id'"));
@@ -35,8 +35,8 @@ if ($mypage == 'product-details.php') {
     $meta_desc = $product_meta['meta_desc'];
     $meta_keyword = $product_meta['meta_keyword'];
 }
-if($mypage=='contact.php'){
-    $meta_title="Contact Us";
+if ($mypage == 'contact.php') {
+    $meta_title = "Contact Us";
 }
 // echo $_SESSION['MOBAIL_OTP'];
 ?>
@@ -102,7 +102,21 @@ if($mypage=='contact.php'){
                                     <ul class="main__menu">
                                         <li class="drop"><a href="index.php">Home</a></li>
                                         <?php foreach ($cat_arr as $list) { ?>
-                                            <li class="drop"><a href="categories.php?id=<?php echo $list['id'] ?>"><?php echo $list['categories'] ?></a></li>
+                                            <li class="drop"><a href="categories.php?id=<?php echo $list['id'] ?>"><?php echo $list['categories'] ?></a>
+                                                <?php
+                                                $cat_id = $list['id'];
+                                                $sub_cat_res = mysqli_query($con, "SELECT * FROM sub_categories WHERE status='1' AND categories_id='$cat_id'");
+                                                if (mysqli_num_rows($sub_cat_res) > 0) {
+                                                ?>
+                                                    <ul class="dropdown">
+                                                        <?php 
+                                                        while($sub_cat_rows=mysqli_fetch_assoc($sub_cat_res)){
+                                                            echo '<li><a href="categories.php?id='.$list['id'].'&sub_categories='.$sub_cat_rows['id'].'">'.$sub_cat_rows['sub_categories'].'</a></li>';
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                <?php } ?>
+                                            </li>
                                         <?php } ?>
                                         <!-- include("./nav-bar.txt") -->
                                         <li><a href="contact.php">contact</a></li>

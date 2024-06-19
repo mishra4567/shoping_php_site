@@ -25,7 +25,8 @@ function get_product(
     $product_id = '',
     $search_str = '',
     $sort_order='',
-    $is_best_seller=''
+    $is_best_seller='',
+    $sub_categories=''
 ) {
     $sql = "SELECT product.*,categories.categories FROM product,categories WHERE product.status=1";
     if ($cat_id != '') {
@@ -33,6 +34,9 @@ function get_product(
     }
     if ($product_id != '') {
         $sql .= " AND product.id='$product_id' ";
+    }
+    if ($sub_categories != '') {
+        $sql .= " AND product.sub_categories_id='$sub_categories' ";
     }
     if ($is_best_seller!= '') {
         $sql .= " AND product.best_seller=1 ";

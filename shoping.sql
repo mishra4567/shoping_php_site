@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2024 at 01:25 PM
+-- Generation Time: Jun 19, 2024 at 09:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -278,7 +278,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobail`, `added_on`) VA
 (5, 'admin', 'a@gmail.com1234', '54545', '46464654654', '2024-05-20 06:41:58'),
 (6, 'admin', 'z@gmail.com', '54545', '46464654654', '2024-05-20 06:42:52'),
 (7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37'),
-(13, '', 'gyhfvghfcvyttfyghfvgh@gmail.com', '789456', '9609379300', '2024-06-16 06:57:54');
+(13, 'awrsedtfghyj', 'gyhfvghfcvyttfyghfvgh@gmail.com', '789456', '9609379300', '2024-06-16 06:57:54');
 
 -- --------------------------------------------------------
 
@@ -299,15 +299,10 @@ CREATE TABLE `wishlist` (
 
 INSERT INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
 (27, 9, 5, '2024-06-15 05:35:32'),
-(32, 13, 6, '2024-06-18 04:45:16'),
-(33, 13, 5, '2024-06-18 04:45:18'),
-(34, 13, 4, '2024-06-18 04:45:19'),
-(35, 13, 1, '2024-06-18 04:45:24'),
 (36, 3, 6, '2024-06-18 04:49:43'),
 (37, 3, 5, '2024-06-18 04:49:45'),
 (38, 3, 1, '2024-06-18 04:49:47'),
-(39, 3, 4, '2024-06-18 04:49:48'),
-(40, 13, 6, '2024-06-18 08:24:09');
+(39, 3, 4, '2024-06-18 04:49:48');
 
 --
 -- Indexes for dumped tables
@@ -435,7 +430,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
