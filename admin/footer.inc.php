@@ -37,6 +37,8 @@ require_once("./inc/connection.inc.php")
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <!-- custom js -->
+     <script src="./js/custom.js"></script>
 </body>
 
 </html>

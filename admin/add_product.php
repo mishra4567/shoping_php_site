@@ -15,6 +15,7 @@ $status = '';
 $meta_keyword = '';
 $tex = '';
 $best_seller = '';
+$sub_categories_id='';
 
 $image_required = 'required';
 $msg = '';
@@ -28,6 +29,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     if ($check > 0) {
         $row = mysqli_fetch_assoc($result);
         $categories_id = $row['categories_id'];
+        $sub_categories_id = $row['sub_categories_id'];
         $name = $row['name'];
         $mrp = $row['mrp'];
         $price = $row['price'];
@@ -47,6 +49,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
 
 if (isset($_POST['submit'])) {
     $categories_id = get_safe_value($con, $_POST['categories_id']);
+    $sub_categories_id = get_safe_value($con, $_POST['sub_categories_id']);
     $name = get_safe_value($con, $_POST['name']);
     $mrp = get_safe_value($con, $_POST['mrp']);
     $price = get_safe_value($con, $_POST['price']);
@@ -88,17 +91,19 @@ if (isset($_POST['submit'])) {
                 // move_uploaded_file($_FILES['image']['tmp_name'], '../media/product/' . $image);
                 move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH . $image);
                 $update_sql = "UPDATE  product SET categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',
-                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',image='$image',best_seller='$best_seller' WHERE id='$id'";
+                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',image='$image',best_seller='$best_seller',
+                sub_categories_id='$sub_categories_id' WHERE id='$id'";
             } else {
                 $update_sql = "UPDATE  product SET categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',
-                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',best_seller='$best_seller' WHERE id='$id'";
+                description='$description',meta_desc='$meta_desc',meta_keyword='$meta_keyword',tex='$tex',meta_title='$meta_title',best_seller='$best_seller',
+                sub_categories_id='$sub_categories_id' WHERE id='$id'";
             }
             mysqli_query($con, $update_sql);
         } else {
             $image = rand(1111111111, 9999999999) . '_' . $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH . $image);
-            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,best_seller,status) VALUE 
-            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','$best_seller','0')");
+            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,best_seller,sub_categories_id,status) VALUE 
+            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','$best_seller','$sub_categories_id','0')");
         }
         header('location:./product.php');
         die();
@@ -123,8 +128,8 @@ include("./sideber.inc.php");
                     <div class="card-body card-block">
                         <form method="post" enctype="multipart/form-data">
                             <div class="form-group mt-3 ">
-                                <label for="categories" class="from-control-label fw -bold">Categories</label>
-                                <select name="categories_id" id="" class="form-control">
+                                <label for="categories" class="from-control-label fw-bold">Categories</label>
+                                <select name="categories_id" id="categories_id" class="form-control" onchange="get_sub_cat('')" required>
                                     <option value="">Select Category</option>
                                     <?php
                                     $result = mysqli_query($con, "SELECT id,categories FROM categories WHERE STATUS='1' ORDER BY categories ASC");
@@ -135,6 +140,13 @@ include("./sideber.inc.php");
                                             echo "<option value=" . $row['id'] . ">" . $row['categories'] . "</option>";
                                         }
                                     } ?>
+                                </select>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="sub_categories" class="from-control-label fw-bold">Sub Categories</label>
+                                <select name="sub_categories_id" id="sub_categories_id" class="form-control" required>
+                                    <option value="">Select Sub Category</option>
+
                                 </select>
                             </div>
                             <div class="form-group mt-3 ">
@@ -219,4 +231,9 @@ include("./sideber.inc.php");
 
     <!-- Footer Start -->
     <?php include("./footer.inc.php") ?>
+    <script>
+        <?php if(isset($_GET['id'])){ ?>
+            get_sub_cat('<?php echo $sub_categories_id ?>');
+        <?php } ?>
+    </script>
     <!-- Footer End -->
