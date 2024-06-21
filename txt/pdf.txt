@@ -1,0 +1,47 @@
+ <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove"><span class="nobr">Product Name</span></th>
+                                        <th class="product-remove"><span class="nobr">Product Image</span></th>
+                                        <th class="product-remove"><span class="nobr">Qty</span></th>
+                                        <th class="product-remove"><span class="nobr">Price</span></th>
+                                        <th class="product-remove"><span class="nobr">Total Price</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                                                            <tr>
+                                            <td class="product-add-to-cart">GREEN SOUL Seoul-X Mid Back Ergonomic</td>
+                                            <td class="product-add-to-cart"><img src="http://localhost:8088/project/shoping_php_site/media/product/4124329009_5.jpg" alt="product image"></td>
+                                            <td class="product-add-to-cart">1</td>
+                                            <td class="product-add-to-cart">$3</td>
+                                            <td class="product-add-to-cart">$3</td>
+                                        </tr>
+                                                                            <tr>
+                                            <td class="product-add-to-cart">Wakefit Safari Fabric Office Executive Chair</td>
+                                            <td class="product-add-to-cart"><img src="http://localhost:8088/project/shoping_php_site/media/product/2567909880_3.jpg" alt="product image"></td>
+                                            <td class="product-add-to-cart">1</td>
+                                            <td class="product-add-to-cart">$7313</td>
+                                            <td class="product-add-to-cart">$7313</td>
+                                        </tr>
+                                                                            <tr>
+                                            <td class="product-add-to-cart">MAHARAJA Omega for Home, Office</td>
+                                            <td class="product-add-to-cart"><img src="http://localhost:8088/project/shoping_php_site/media/product/2246527865_2.png" alt="product image"></td>
+                                            <td class="product-add-to-cart">1</td>
+                                            <td class="product-add-to-cart">$2879</td>
+                                            <td class="product-add-to-cart">$2879</td>
+                                        </tr>
+                                                                            <tr>
+                                            <td class="product-add-to-cart">test</td>
+                                            <td class="product-add-to-cart"><img src="http://localhost:8088/project/shoping_php_site/media/product/6892576093_1.jpg" alt="product image"></td>
+                                            <td class="product-add-to-cart">1</td>
+                                            <td class="product-add-to-cart">$56</td>
+                                            <td class="product-add-to-cart">$56</td>
+                                        </tr>
+                                                                        <tr>
+                                        <td colspan="3"></td>
+                                        <td class="product-add-to-cart">Total Price</td>
+                                        <td class="product-add-to-cart">$10251</td>
+                                    </tr>
+                                </tbody>
+                                <!-- include("./tfoot.txt) -->
+                            </table>

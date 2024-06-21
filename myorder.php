@@ -2,12 +2,12 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
-if(!isset($_SESSION['USER_LOGIN'])){
+if (!isset($_SESSION['USER_LOGIN'])) {
 ?>
-<script>
-    window.location.href='index.php';
-</script>
-<?php 
+    <script>
+        window.location.href = 'index.php';
+    </script>
+<?php
 }
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
@@ -56,7 +56,9 @@ if(!isset($_SESSION['USER_LOGIN'])){
                                     while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                         <tr>
-                                            <td class="product-add-to-cart"><a href="./myorder_details.php?id=<?php echo $row['id'] ?>"><?php echo $row['id'] ?></a></td>
+                                            <td class="product-add-to-cart"><a href="./myorder_details.php?id=<?php echo $row['id'] ?>"><?php echo $row['id'] ?></a><br>
+                                                <a href="./order_pdf.php?id=<?php echo $row['id'] ?>">Download Invoice</a>
+                                            </td>
                                             <td class="product-add-to-cart"><?php echo $row['added_on'] ?></td>
                                             <td class="product-add-to-cart">
                                                 <?php echo $row['address'] ?><br>

@@ -6,7 +6,7 @@ $order_id = get_safe_value($con, $_GET['id']);
 if (!isset($order_id) == 0) {
 ?>
     <script>
-        window.location.href = 'index.php';
+        // window.location.href = 'index.php';
     </script>
  <?php
 }

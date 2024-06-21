@@ -1,9 +1,7 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
-
 include_once("./top-inc.php");
-
 ?>
 <!-- End Header Area -->
 <!-- End Offset Wrapper -->
