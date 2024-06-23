@@ -76,7 +76,12 @@ include("./sideber.inc.php");
                                         <td class=" table-data  "><?php echo $row['name'] ?></td>
                                         <td class=" table-data  "><?php echo $row['price'] ?></td>
                                         <td class=" table-data  "><?php echo $row['mrp'] ?></td>
-                                        <td class=" table-data  "><?php echo $row['qty'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['qty'] ?><br><br>
+                                        <?php $productSoldQtyByProductId=productSoldQtyByProductId($con,$row['id']);
+                                        $pending_qty=($row['qty']-$productSoldQtyByProductId)
+                                        ?>
+                                        Pending Qty:<?php echo $pending_qty ?>
+                                        </td>
                                         <!-- <td class=" table-data  "><?php
                                                                         // echo $row['short_desc']
                                                                         ?></td> -->

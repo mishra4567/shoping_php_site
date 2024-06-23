@@ -86,7 +86,11 @@ function manage_cart(pid, type) {
             if (type == 'update' || type == 'remove') {
                 window.location.href = window.location.href;
             }
-            jQuery('.htc__qua').html(result);
+            if (result == 'not_avaliable') {
+                alert('Qty not avaliable');
+            } else {
+                jQuery('.htc__qua').html(result);
+            }
         }
     })
 }
@@ -297,7 +301,7 @@ function update_password() {
         jQuery('#confirm_new_password_error').html('Please enter confirm new password');
         is_error = 'yes';
     }
-    if (new_password!='' && confirm_new_password!='' && new_password!= confirm_new_password) {
+    if (new_password != '' && confirm_new_password != '' && new_password != confirm_new_password) {
         jQuery('#confirm_new_password_error').html('Please enter same password');
         is_error = 'yes';
     }

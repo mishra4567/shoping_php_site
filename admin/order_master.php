@@ -3,9 +3,12 @@ require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 $order_id = get_safe_value($con, $_GET['id']);
 if(isset($_POST['update_order_status'])){
-    echo $update_order_status=$_POST['update_order_status'];
-    mysqli_query($con,"UPDATE `order` SET order_status='$update_order_status' WHERE id='$order_id'");
-
+    $update_order_status=$_POST['update_order_status'];
+    if($update_order_status=='5'){
+        mysqli_query($con,"UPDATE `order` SET order_status='$update_order_status',payment_status='success' WHERE id='$order_id'");
+    }else{
+        mysqli_query($con,"UPDATE `order` SET order_status='$update_order_status' WHERE id='$order_id'");
+    }
 }
 
 // if (isset($_GET['type']) && $_GET['type'] != '') {
@@ -45,16 +48,17 @@ include("./sideber.inc.php");
                     <tbody>
                         <?php
                         $result = mysqli_query($con, "SELECT DISTINCT(order_details.id), order_details.*,product.name,product.image, 
-                        `order`.address,`order`.city,`order`.pincode,`order`.order_status
-                         FROM order_details,product,`order` WHERE order_details.order_id='$order_id' 
-                                        AND  product.id=order_details.product_id");
+                        `order`.address,`order`.city,`order`.pincode
+                        FROM order_details,product,`order` WHERE order_details.order_id='$order_id' 
+                        AND order_details.product_id=product.id GROUP by order_details.id");
+                        $userInfo=mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `order` WHERE id='$order_id'"));
                         $total_price = 0;
+                        $address = $userInfo['address'];
+                        $city = $userInfo['city'];
+                        $pincode = $userInfo['pincode'];
                         while ($row = mysqli_fetch_assoc($result)) {
-                            $address = $row['address'];
-                            $city = $row['city'];
-                            $pincode = $row['pincode'];
                             $total_price = $total_price + ($row['qty'] * $row['price']);
-                            $order_status = $row['order_status'];
+                            // $order_status = $row['order_status'];
                         ?>
                             <tr>
                                 <td class="product-add-to-cart"><?php echo $row['name'] ?></td>
@@ -88,8 +92,8 @@ include("./sideber.inc.php");
                         <select class="form-control" name="update_order_status" id="">
                             <option value="">select status</option>
                             <?php
-                            $result = mysqli_query($con, "SELECT * FROM order_status");
-                            while ($row = mysqli_fetch_assoc($result)) {
+                            $res = mysqli_query($con, "SELECT * FROM order_status");
+                            while ($row = mysqli_fetch_assoc($res)) {
                                 if ($row['id'] == $categories_id) {
                             ?>
                                     <option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>

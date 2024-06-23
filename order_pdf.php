@@ -3,7 +3,7 @@ require_once('./vendor_tcpdf/autoload.php'); // If you used Composer
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 if(!isset($_SESSION['USER_ID'])){
-    die();
+    header("location:404.php");
 }
 $order_id = get_safe_value($con, $_GET['id']);
 // or

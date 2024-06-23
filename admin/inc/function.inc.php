@@ -17,3 +17,9 @@ function get_safe_value($con, $str)
         return mysqli_real_escape_string($con, $str);
     }
 };
+function productSoldQtyByProductId($con,$pid){
+    $sql="SELECT SUM(order_details.qty) AS qty FROM order_details,`order` WHERE `order`.id=order_details.order_id AND order_details.product_id=$pid AND `order`.order_status!=4";
+    $res=mysqli_query($con,$sql);
+    $row=mysqli_fetch_assoc($res);
+    return $row['qty'];
+}
