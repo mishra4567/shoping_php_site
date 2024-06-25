@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2024 at 04:36 PM
+-- Generation Time: Jun 25, 2024 at 07:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -123,7 +123,7 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_type`, `total_price`, `payment_status`, `order_status`, `added_on`, `txnid`, `milhpayid`, `payu_status`) VALUES
 (1, 6, 'marishda', 'marishda', 721449, 'payU', 30002, 'pending', 4, '2024-05-25 07:40:31', '', '', ''),
-(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'pending', 4, '2024-06-11 01:40:26', '', '', ''),
+(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'success', 1, '2024-06-11 01:40:26', '', '', ''),
 (3, 9, 'kalkata, kalkata', 'kalkata', 700001, 'COD', 3599, 'success', 4, '2024-06-15 05:36:00', '', '', ''),
 (4, 13, 'asdgdfh', 'wefdastf', 645632, 'payU', 3599, 'pending', 4, '2024-06-18 02:23:00', '', '', ''),
 (5, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 10251, 'success', 4, '2024-06-18 04:44:49', '', '', ''),
@@ -234,6 +234,25 @@ INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`
 (16, 25, 4, 'u65ytehdgfdc', 565654, 6565, 1, '3679708304_651584201_Floral-Embroidered-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
 (17, 27, 1, 'awrsedtfghyj', 565654, 6565, 2, '7803170230_309027777_Floral-Print-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
 (18, 32, 7, 'tshirt', 5654640, 545, 10, '7585133237_931830512__8-(1)-E5x-104831-NJD.jpg', '', '', '', 1, '', 0, '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shiprockettoken`
+--
+
+CREATE TABLE `shiprockettoken` (
+  `id` int(11) NOT NULL,
+  `token` varchar(555) NOT NULL,
+  `added_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `shiprockettoken`
+--
+
+INSERT INTO `shiprockettoken` (`id`, `token`, `added_on`) VALUES
+(1, '', '2024-06-25 16:56:33');
 
 -- --------------------------------------------------------
 
@@ -360,6 +379,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shiprockettoken`
+--
+ALTER TABLE `shiprockettoken`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
@@ -422,6 +447,12 @@ ALTER TABLE `order_status`
 --
 ALTER TABLE `product`
   MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `shiprockettoken`
+--
+ALTER TABLE `shiprockettoken`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`

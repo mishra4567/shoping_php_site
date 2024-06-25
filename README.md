@@ -36,3 +36,6 @@ Then you relload 2nd tab (what you want) you se thet tab a otp you see
 FORGOT PASSWORD 
 your password send your email id
 
+shiprocket--API 
+not working on xampp
+And this api code cannot work
