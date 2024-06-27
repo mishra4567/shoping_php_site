@@ -321,3 +321,30 @@ function update_password() {
         })
     }
 }
+//coupon section
+function set_coupon(){
+    var coupon_str=jQuery('#coupon_str').val();
+    // alert(coupon_str);
+    if(coupon_str!=''){
+        jQuery('#coupon_result').html('');
+        jQuery.ajax({
+            url:'set_coupon.php',
+            type:'post',
+            data:'coupon_str='+coupon_str,
+            success:function(result){
+                var data=jQuery.parseJSON(result);
+                // console.log(data.is_error);
+                if(data.is_error=='yes'){
+                    jQuery('#coupon_box').hide();
+                    jQuery('#coupon_result').html(data.dd);
+                    jQuery('#order_total_price').html(data.result);
+                }
+                if(data.is_error=='no'){
+                    jQuery('#coupon_box').show();
+                    jQuery('#coupon_price').html(data.dd);
+                    jQuery('#order_total_price').html(data.result);
+                }
+            }
+        })
+    }
+}

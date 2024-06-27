@@ -84,6 +84,7 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
                     <a href="./categories.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Categories Master</a>
                     <a href="./sub_categories.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Sub Categories</a>
                     <a href="./order.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>order Master</a>
+                    <a href="./coupon.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupon Master</a>
                     <a href="./user-master.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>User Master</a>
                     <a href="./contact.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Contact Us</a>
                     <!-- <div class="nav-item dropdown">

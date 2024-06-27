@@ -2,14 +2,17 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
-$order_id = get_safe_value($con, $_GET['id']);
 if (!isset($order_id) == 0) {
 ?>
     <script>
         // window.location.href = 'index.php';
     </script>
- <?php
+<?php
 }
+
+$order_id = get_safe_value($con, $_GET['id']);
+$coupon_details = mysqli_fetch_assoc(mysqli_query($con, "SELECT coupon_value  FROM `order` WHERE id='$order_id'"));
+$coupon_value = $coupon_details['coupon_value'];
 ?>
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(images/bg/4.jpg) no-repeat scroll center center / cover ;">
     <div class="ht__bradcaump__wrap">
@@ -51,7 +54,7 @@ if (!isset($order_id) == 0) {
                                     <?php
                                     $uid = $_SESSION['USER_ID'];
                                     $result = mysqli_query($con, "SELECT DISTINCT(order_details.id), order_details.*,product.name,product.image FROM order_details,product,`order` WHERE order_details.order_id='$order_id' 
-                                        AND `order`.user_id='$uid' AND product.id=order_details.product_id");
+                                        AND `order`.user_id='$uid' AND order_details.product_id=product.id");
                                     $total_price = 0;
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         $total_price = $total_price + ($row['qty'] * $row['price']);
@@ -63,11 +66,18 @@ if (!isset($order_id) == 0) {
                                             <td class="product-add-to-cart">$<?php echo $row['price'] ?></td>
                                             <td class="product-add-to-cart">$<?php echo $row['qty'] * $row['price'] ?></td>
                                         </tr>
+                                    <?php }
+                                    if ($coupon_value != '') { ?>
+                                        <tr>
+                                            <td colspan="3"></td>
+                                            <td class="product-add-to-cart">Coupon Value</td>
+                                            <td class="product-add-to-cart">$<?php echo $coupon_value ?></td>
+                                        </tr>
                                     <?php } ?>
                                     <tr>
                                         <td colspan="3"></td>
-                                        <td class="product-add-to-cart">Total Price</td>
-                                        <td class="product-add-to-cart">$<?php echo $total_price ?></td>
+                                        <td class="product-name">Total Price</td>
+                                        <td class="product-name">$ <?php echo $total_price - $coupon_value;?></td>
                                     </tr>
                                 </tbody>
                                 <!-- include("./tfoot.txt) -->

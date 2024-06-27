@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2024 at 07:40 PM
+-- Generation Time: Jun 27, 2024 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -98,6 +98,29 @@ INSERT INTO `contact_us` (`id`, `name`, `email`, `mobail`, `comment`, `added_on`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `coupon_master`
+--
+
+CREATE TABLE `coupon_master` (
+  `id` int(11) NOT NULL,
+  `coupon_code` varchar(50) NOT NULL,
+  `coupon_value` int(11) NOT NULL,
+  `coupon_type` varchar(10) NOT NULL,
+  `cart_min_value` int(11) NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `coupon_master`
+--
+
+INSERT INTO `coupon_master` (`id`, `coupon_code`, `coupon_value`, `coupon_type`, `cart_min_value`, `status`) VALUES
+(1, 'First50', 20, 'Rupee', 2500, 1),
+(2, 'First60', 20, 'Percentage', 1000, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order`
 --
 
@@ -114,23 +137,29 @@ CREATE TABLE `order` (
   `added_on` datetime NOT NULL,
   `txnid` varchar(50) NOT NULL,
   `milhpayid` varchar(50) NOT NULL,
-  `payu_status` varchar(50) NOT NULL
+  `payu_status` varchar(50) NOT NULL,
+  `coupon_id` int(11) NOT NULL,
+  `coupon_value` int(50) NOT NULL,
+  `coupon_code` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_type`, `total_price`, `payment_status`, `order_status`, `added_on`, `txnid`, `milhpayid`, `payu_status`) VALUES
-(1, 6, 'marishda', 'marishda', 721449, 'payU', 30002, 'pending', 4, '2024-05-25 07:40:31', '', '', ''),
-(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'success', 1, '2024-06-11 01:40:26', '', '', ''),
-(3, 9, 'kalkata, kalkata', 'kalkata', 700001, 'COD', 3599, 'success', 4, '2024-06-15 05:36:00', '', '', ''),
-(4, 13, 'asdgdfh', 'wefdastf', 645632, 'payU', 3599, 'pending', 4, '2024-06-18 02:23:00', '', '', ''),
-(5, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 10251, 'success', 4, '2024-06-18 04:44:49', '', '', ''),
-(6, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6565, 'success', 4, '2024-06-22 07:26:04', '', '', ''),
-(7, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6565, 'success', 4, '2024-06-23 06:23:09', '', '', ''),
-(8, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5450, 'success', 4, '2024-06-23 06:34:23', '', '', ''),
-(9, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 4905, 'success', 3, '2024-06-23 01:31:57', '', '', '');
+INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_type`, `total_price`, `payment_status`, `order_status`, `added_on`, `txnid`, `milhpayid`, `payu_status`, `coupon_id`, `coupon_value`, `coupon_code`) VALUES
+(1, 6, 'marishda', 'marishda', 721449, 'payU', 30002, 'pending', 4, '2024-05-25 07:40:31', '', '', '', 0, 0, ''),
+(2, 6, 'Haldia,East Medinipur,West Bengal - 721635, Haldia,East Medinipur,West Bengal - 721635', 'Haldia', 721635, 'payU', 2882, 'success', 1, '2024-06-11 01:40:26', '', '', '', 0, 0, ''),
+(3, 9, 'kalkata, kalkata', 'kalkata', 700001, 'COD', 3599, 'success', 4, '2024-06-15 05:36:00', '', '', '', 0, 0, ''),
+(4, 13, 'asdgdfh', 'wefdastf', 645632, 'payU', 3599, 'pending', 4, '2024-06-18 02:23:00', '', '', '', 0, 0, ''),
+(5, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 10251, 'success', 4, '2024-06-18 04:44:49', '', '', '', 0, 0, ''),
+(6, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6565, 'success', 4, '2024-06-22 07:26:04', '', '', '', 0, 0, ''),
+(7, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6565, 'success', 4, '2024-06-23 06:23:09', '', '', '', 0, 0, ''),
+(8, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5450, 'success', 4, '2024-06-23 06:34:23', '', '', '', 0, 0, ''),
+(9, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 4905, 'success', 3, '2024-06-23 01:31:57', '', '', '', 0, 0, ''),
+(12, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5252, 'success', 1, '2024-06-27 02:13:49', '', '', '', 2, 1313, 'First60'),
+(13, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5252, 'success', 1, '2024-06-27 02:32:55', '', '', '', 2, 1313, 'First60'),
+(14, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6545, 'success', 1, '2024-06-27 02:34:57', '', '', '', 1, 20, 'First50');
 
 -- --------------------------------------------------------
 
@@ -170,7 +199,12 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `ad
 (12, 6, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (13, 7, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (14, 8, 18, 10, 545, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(15, 9, 18, 9, 545, '0000-00-00 00:00:00', 0, 0, 0, 0);
+(15, 9, 18, 9, 545, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(16, 10, 18, 1, 545, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(17, 11, 17, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(18, 12, 17, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(19, 13, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(20, 14, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -231,7 +265,7 @@ INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`
 (5, 25, 0, 'Wakefit Safari Fabric Office Executive Chair', 13299, 7313, 10, '2567909880_3.jpg', 'Wakefit Safari Fabric Office Executive Chair  (Black, Grey, Optional Installation Available)', 'Our Safari high back office chairs online come with a synchro tilt mechanism that provides coordinated movement of the seat and back to support change of posture for comfortable working throughout the day. The ergonomic backrest of these office chairs online reduces stress on your spine and lower back while the adjustable lumbar support and arms helps you check your posture. The Wakefit Safari high back office chairs online have a mesh headrest which can protect you from annoying neck and shoulder area aches that have become a common occupational hazard. They also have a wide spider base for stability and durability.', 'This is a Chear', 1, 'chear45', 5465, 'Chear', 1),
 (6, 26, 5, 'CELLBELL Desire C104 Mid Back', 9999, 3599, 10, '8179220578_4.jpg', 'CELLBELL Desire C104 Mid Back Comfortable Fabric Office Executive Chair  (Red, Optional Installation Available)', '1) Ergonomic Sitting Position : C104 Chair provides you best in class sitting postures for extra comfort. 2) Seat and Base : 2 inch Thick Foam Cushion Padded Seat for your long hours comfort | Pneumatic Hydraulic with 4 inch seat height adjustment | Breathable contoured Mesh Back Fabric | Chair comes with Sturdy Metal Base for extra strength. 3) Lumbar Adjustments : Lumbar adjustments can be pushed upward, down for better supports to the back. It also features locking back support lever adjustment, if you wish to relax or stretch legs! 4) Arm-rest : Padded Arm-rest. 5) Height Suitability : 5 ft to 6 ft. 6) Weight Capacity : 105 Kgs. 7) BIFMA Certified. 8) Warranty : 12 Months Warranty against Manufacturing Defects.', '', 1, '', 565, '', 0),
 (7, 27, 0, 'GREEN SOUL Seoul-X Mid Back Ergonomic', 5980, 3, 10, '4124329009_5.jpg', 'GREEN SOUL Seoul-X Mid Back Ergonomic|Home,WFH|Moulded Foam|Extra Comfort Fabric Office Adjustable Arm Chair  (Black, Optional Installation Available)', 'Introducing the Green Soul Seoul-X Mid Back Ergonomic Office Chair. With its premium fabric upholstery on the chair back and seat, this chair offers a touch of luxury to your workspace. The wide molded foam chair seat provides exceptional comfort and support throughout the day. The chair frame is made of solid wood, ensuring long-lasting durability. Equipped with fixed PP armrests, this chair offers added support to your arms and shoulders. The push back mechanism allows the chair back to rock between 90-120 degrees, giving you the flexibility to find your preferred angle for relaxation or focused work. The Class 3 gas lift ensures smooth height adjustment, while the heavy-duty metal wheelbase and 50mm nylon dual castor wheels provide stability and effortless mobility on various floor surfaces. The Seoul-X chair has a weight holding capacity of 90 kgs, . It comes with a 15 Months warranty, giving you peace of mind. The chair is designed for easy assembly with the included DIY kit.', '', 1, '', 89, '', 0),
-(16, 25, 4, 'u65ytehdgfdc', 565654, 6565, 1, '3679708304_651584201_Floral-Embroidered-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
+(16, 25, 4, 'u65ytehdgfdc', 565654, 6565, 2, '3679708304_651584201_Floral-Embroidered-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
 (17, 27, 1, 'awrsedtfghyj', 565654, 6565, 2, '7803170230_309027777_Floral-Print-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
 (18, 32, 7, 'tshirt', 5654640, 545, 10, '7585133237_931830512__8-(1)-E5x-104831-NJD.jpg', '', '', '', 1, '', 0, '', 1);
 
@@ -330,7 +364,8 @@ INSERT INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
 (37, 3, 5, '2024-06-18 04:49:45'),
 (38, 3, 1, '2024-06-18 04:49:47'),
 (39, 3, 4, '2024-06-18 04:49:48'),
-(45, 13, 5, '2024-06-23 04:28:13');
+(45, 13, 5, '2024-06-23 04:28:13'),
+(46, 13, 16, '2024-06-25 07:45:10');
 
 --
 -- Indexes for dumped tables
@@ -352,6 +387,12 @@ ALTER TABLE `categories`
 -- Indexes for table `contact_us`
 --
 ALTER TABLE `contact_us`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupon_master`
+--
+ALTER TABLE `coupon_master`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -425,16 +466,22 @@ ALTER TABLE `contact_us`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `coupon_master`
+--
+ALTER TABLE `coupon_master`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -470,7 +517,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

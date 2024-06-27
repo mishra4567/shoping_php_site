@@ -11,8 +11,6 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
 }
 
 $cart_total = 0;
-
-
 if (isset($_POST['submit'])) {
     $address = get_safe_value($con, $_POST['address']);
     $city = get_safe_value($con, $_POST['city']);
@@ -32,8 +30,22 @@ if (isset($_POST['submit'])) {
     }
     $order_status = '1';
     $added_on = date('Y-m-d h:i:s');
-    mysqli_query($con, "INSERT INTO `order` (user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on) 
-    VALUES ('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on')");
+    // coupon add
+    if(isset($_SESSION['COUPON_ID'])){
+        $coupon_id=$_SESSION['COUPON_ID'];
+        $coupon_code=$_SESSION['COUPON_CODE'];
+        $coupon_value=$_SESSION['COUPON_VALUE'];
+        $total_price=($total_price-$coupon_value);
+        unset($_SESSION['COUPON_ID']);
+        unset($_SESSION['COUPON_CODE']);
+        unset($_SESSION['COUPON_VALUE']);
+    }else{
+        $coupon_id='';
+        $coupon_code='';
+        $coupon_value='';
+    }
+    mysqli_query($con, "INSERT INTO `order` (user_id,address,city,pincode,payment_type,total_price,payment_status,order_status,added_on,coupon_id,coupon_code,coupon_value) 
+    VALUES ('$user_id','$address','$city','$pincode','$payment_type','$total_price','$payment_status','$order_status','$added_on','$coupon_id','$coupon_code','$coupon_value')");
 
     $order_id = mysqli_insert_id($con);
     foreach ($_SESSION['cart'] as $key => $val) {
@@ -184,7 +196,7 @@ if (isset($_POST['submit'])) {
                                             <label for="payU">payU</label>
                                         </div>
                                         <div class="contact-btn">
-                                            <button type="submit" name="submit">Submit</button>
+                                            <button class="fv-btn" type="submit" name="submit">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -233,10 +245,24 @@ if (isset($_POST['submit'])) {
                             <span class="price">$9.00</span>
                         </div>
                     </div> -->
+                    <div class="ordre-details__total" id="coupon_box">
+                        <h5>Coupon Value</h5>
+                        <span class="price" id="coupon_price"></span>
+                    </div>
                     <div class="ordre-details__total">
                         <h5>Order total</h5>
-                        <span class="price">$<?php echo $cart_total ?></span>
+                        <span class="price" id="order_total_price">$<?php  echo $cart_total ?></span>
                     </div>
+                    <form method="post">
+                        <div class="single-contact-form">
+                            <label for="" class="coupon-label">Have any coupon code: </label>
+                            <div class="ordre-details__total bilinfo">
+                                <input type="text" name="" class="coupon_style mr5" id="coupon_str" placeholder="Enter code">
+                                <input type="button" name="submit" value="Apply" class="fv-btn coupon_style" onclick="set_coupon()">
+                            </div>
+                            <div class="coupon_result" style="color: red;" id="coupon_result"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -244,4 +270,10 @@ if (isset($_POST['submit'])) {
 </div>
 <!-- cart-main-area end -->
 <!-- Start Footer Area -->
-<?php include_once("./footer-inc.php") ?>
+<?php
+if(isset($_SESSION['COUPON_ID'])){
+    unset($_SESSION['COUPON_ID']);
+    unset($_SESSION['COUPON_CODE']);
+    unset($_SESSION['COUPON_VALUE']);
+}
+include_once("./footer-inc.php") ?>

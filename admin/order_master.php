@@ -2,15 +2,18 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 $order_id = get_safe_value($con, $_GET['id']);
-if(isset($_POST['update_order_status'])){
-    $update_order_status=$_POST['update_order_status'];
-    if($update_order_status=='5'){
-        mysqli_query($con,"UPDATE `order` SET order_status='$update_order_status',payment_status='success' WHERE id='$order_id'");
-    }else{
-        mysqli_query($con,"UPDATE `order` SET order_status='$update_order_status' WHERE id='$order_id'");
+if (isset($_POST['update_order_status'])) {
+    $update_order_status = $_POST['update_order_status'];
+    if ($update_order_status == '5') {
+        mysqli_query($con, "UPDATE `order` SET order_status='$update_order_status',payment_status='success' WHERE id='$order_id'");
+    } else {
+        mysqli_query($con, "UPDATE `order` SET order_status='$update_order_status' WHERE id='$order_id'");
     }
 }
-
+// $order_id = get_safe_value($con, $_GET['id']);
+$coupon_details = mysqli_fetch_assoc(mysqli_query($con, "SELECT coupon_value,coupon_code  FROM `order` WHERE id='$order_id'"));
+$coupon_value = $coupon_details['coupon_value'];
+$coupon_code=$coupon_details['coupon_code'];
 // if (isset($_GET['type']) && $_GET['type'] != '') {
 //     $type = get_safe_value($con, $_GET['type']);
 //     if ($type == 'delete') {
@@ -51,7 +54,7 @@ include("./sideber.inc.php");
                         `order`.address,`order`.city,`order`.pincode
                         FROM order_details,product,`order` WHERE order_details.order_id='$order_id' 
                         AND order_details.product_id=product.id GROUP by order_details.id");
-                        $userInfo=mysqli_fetch_assoc(mysqli_query($con,"SELECT * FROM `order` WHERE id='$order_id'"));
+                        $userInfo = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM `order` WHERE id='$order_id'"));
                         $total_price = 0;
                         $address = $userInfo['address'];
                         $city = $userInfo['city'];
@@ -64,14 +67,29 @@ include("./sideber.inc.php");
                                 <td class="product-add-to-cart"><?php echo $row['name'] ?></td>
                                 <td class="product-add-to-cart"><img class="product_img" src="<?php echo PRODUCT_IMAGE_SITE_PATH, $row['image'] ?>" alt="product image"></td>
                                 <td class="product-add-to-cart"><?php echo $row['qty'] ?></td>
-                                <td class="product-add-to-cart"><?php echo $row['price'] ?></td>
-                                <td class="product-add-to-cart"><?php echo $row['qty'] * $row['price'] ?></td>
+                                <td class="product-add-to-cart">$<?php echo $row['price'] ?></td>
+                                <td class="product-add-to-cart">$<?php echo $row['qty'] * $row['price'] ?></td>
                             </tr>
-                        <?php } ?>
+                        <?php }
+                        if ($coupon_value != '') {
+                        ?>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="product-add-to-card">Coupon Code</td>
+                                <td class="product-add-to-card"><?php echo $coupon_code ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="product-add-to-card">Coupon Value</td>
+                                <td class="product-add-to-card">$<?php echo $coupon_value ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td colspan="3"></td>
                             <td class="product-add-to-cart">Total Price</td>
-                            <td class="product-add-to-cart"><?php echo $total_price ?></td>
+                            <td class="product-add-to-cart">$<?php echo $total_price - $coupon_value ?></td>
                         </tr>
                     </tbody>
                 </table>
