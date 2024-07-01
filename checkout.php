@@ -2,6 +2,7 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
+include_once("./invoice_mail.php");
 if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
 ?>
     <script>
@@ -55,6 +56,7 @@ if (isset($_POST['submit'])) {
         mysqli_query($con, "INSERT INTO `order_details` (order_id,product_id,qty,price) 
         VALUES ('$order_id','$key','$qty','$price')");
     }
+    sendInvoice($con,$order_id);
     unset($_SESSION['cart']);
 ?>
     <script>

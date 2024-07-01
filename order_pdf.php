@@ -6,6 +6,14 @@ if(!isset($_SESSION['USER_ID'])){
     header("location:404.php");
 }
 $order_id = get_safe_value($con, $_GET['id']);
+$coupon_details=mysqli_fetch_assoc(mysqli_query($con,"SELECT coupon_value,coupon_code FROM `order` WHERE id='$order_id'"));
+$coupon_value=$coupon_details['coupon_value'];
+$coupon_code=$coupon_details['coupon_code'];
+if($coupon_code!=''){
+    $coupon_name=$coupon_details['coupon_code'];
+}else{
+    $coupon_name="No coupon Collect";
+}
 // or
 // require_once('path/to/tcpdf.php'); // If you manually downloaded TCPDF
 
@@ -74,12 +82,24 @@ $html = '
                         <td>&nbsp;&nbsp;'.$row['qty'].'</td>
                         <td>&nbsp;&nbsp;$'.$row['price'].'</td>
                         <td>&nbsp;&nbsp;$'.$pp.'</td>
-                    </tr>';
+                    </tr>
+                    <tr>
+                        <td>Coupon Details:-</td>
+                        <td colspan="">Coupon name:-</td>
+                        <td>'.$coupon_name.'</td>
+                    ';
+                 }
+                 if($coupon_value!=''){
+                 $html.='
+                        <td colspan="">Coupon Value:-</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$'.$coupon_value.'</td>
+                    
+                 </tr>';
                  }
                     $html.='<tr>
                         <td colspan="3"></td>
                         <td>Total Price</td>
-                        <td>&nbsp;&nbsp;$'.$total_price.'</td>
+                        <td>&nbsp;&nbsp;$'.$total_price-$coupon_value.'</td>
                     </tr>
             </tbody>
         </table>

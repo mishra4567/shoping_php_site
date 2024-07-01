@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2024 at 04:45 PM
+-- Generation Time: Jul 01, 2024 at 12:13 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -116,7 +116,8 @@ CREATE TABLE `coupon_master` (
 
 INSERT INTO `coupon_master` (`id`, `coupon_code`, `coupon_value`, `coupon_type`, `cart_min_value`, `status`) VALUES
 (1, 'First50', 20, 'Rupee', 2500, 1),
-(2, 'First60', 20, 'Percentage', 1000, 1);
+(2, 'First60', 20, 'Percentage', 1000, 1),
+(3, 'first10', 20, 'Rupee', 50, 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,27 @@ INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_typ
 (9, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 4905, 'success', 3, '2024-06-23 01:31:57', '', '', '', 0, 0, ''),
 (12, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5252, 'success', 1, '2024-06-27 02:13:49', '', '', '', 2, 1313, 'First60'),
 (13, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 5252, 'success', 1, '2024-06-27 02:32:55', '', '', '', 2, 1313, 'First60'),
-(14, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6545, 'success', 1, '2024-06-27 02:34:57', '', '', '', 1, 20, 'First50');
+(14, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6545, 'success', 1, '2024-06-27 02:34:57', '', '', '', 1, 20, 'First50'),
+(15, 13, 'asdgdfh', 'wefdastf', 645632, 'payU', 7313, 'pending', 1, '2024-06-30 01:22:16', '', '', '', 0, 0, ''),
+(16, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 6565, 'success', 1, '2024-06-30 02:03:57', '', '', '', 0, 0, ''),
+(17, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-06-30 02:14:57', '', '', '', 0, 0, ''),
+(18, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 545, 'success', 1, '2024-06-30 02:16:47', '', '', '', 0, 0, ''),
+(19, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 7313, 'success', 1, '2024-06-30 02:18:07', '', '', '', 0, 0, ''),
+(20, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 7313, 'success', 1, '2024-06-30 04:23:54', '', '', '', 0, 0, ''),
+(21, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 60, 'success', 1, '2024-06-30 04:24:46', '', '', '', 0, 0, ''),
+(22, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 60, 'success', 1, '2024-06-30 04:27:41', '', '', '', 0, 0, ''),
+(23, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 0, 'success', 1, '2024-06-30 04:57:29', '', '', '', 0, 0, ''),
+(24, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 90, 'success', 1, '2024-06-30 04:58:03', '', '', '', 0, 0, ''),
+(25, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 0, 'success', 1, '2024-06-30 04:58:15', '', '', '', 0, 0, ''),
+(26, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 90, 'success', 1, '2024-06-30 04:58:40', '', '', '', 0, 0, ''),
+(27, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-06-30 05:57:45', '', '', '', 0, 0, ''),
+(28, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 90, 'success', 1, '2024-06-30 06:00:20', '', '', '', 0, 0, ''),
+(29, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 60, 'success', 1, '2024-06-30 06:04:13', '', '', '', 0, 0, ''),
+(30, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 0, 'success', 1, '2024-06-30 06:05:05', '', '', '', 0, 0, ''),
+(31, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 40, 'success', 1, '2024-06-30 06:07:56', '', '', '', 3, 20, 'first10'),
+(32, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:00:48', '', '', '', 0, 0, ''),
+(33, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:02:19', '', '', '', 0, 0, ''),
+(34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60');
 
 -- --------------------------------------------------------
 
@@ -204,7 +225,24 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `ad
 (17, 11, 17, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (18, 12, 17, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (19, 13, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(20, 14, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0);
+(20, 14, 16, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(21, 15, 5, 1, 7313, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(22, 16, 17, 1, 6565, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(23, 17, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(24, 18, 18, 1, 545, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(25, 19, 5, 1, 7313, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(26, 20, 5, 1, 7313, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(27, 21, 3, 1, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(28, 22, 3, 1, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(29, 24, 2, 1, 90, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(30, 26, 2, 1, 90, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(31, 27, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(32, 28, 2, 1, 90, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(33, 29, 3, 1, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(34, 31, 3, 1, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(35, 32, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(36, 33, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(37, 34, 6, 1, 3599, '0000-00-00 00:00:00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -469,19 +507,19 @@ ALTER TABLE `contact_us`
 -- AUTO_INCREMENT for table `coupon_master`
 --
 ALTER TABLE `coupon_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `order_status`
