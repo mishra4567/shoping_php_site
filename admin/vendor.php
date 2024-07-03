@@ -13,15 +13,16 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
         } else {
             $status = '0';
         }
-        $update_status_sql = "UPDATE coupon_master SET status='$status' WHERE id='$id'";
+        $update_status_sql = "UPDATE admin SET status='$status' WHERE id='$id'";
         mysqli_query($con, $update_status_sql);
     }
     if ($type == 'delete') {
         $id = get_safe_value($con, $_GET['id']);
-        $delete_sql = "DELETE FROM coupon_master WHERE id='$id'";
+        $delete_sql = "DELETE FROM admin WHERE id='$id'";
         mysqli_query($con, $delete_sql);
     }
 }
+$sql = "SELECT * FROM admin WHERE role='1' ORDER BY id DESC"; //order by name DESC
 include("./sideber.inc.php");
 ?>
 <style>
@@ -37,7 +38,7 @@ include("./sideber.inc.php");
     <!-- Blank Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row  bg-light rounded align-items-center justify-content-center mx-0">
-            <div>coupon master <a href="./add_coupon.php" class="text-primary">Add coupon</a></div>
+            <div>Vendor master <a href="./vendor_management.php" class="text-primary">Add Vendor</a></div>
             <div class="">
                 <div class="table-scroll">
                     <!-- <form method="post"> -->
@@ -45,11 +46,12 @@ include("./sideber.inc.php");
                             <thead>
                                 <tr class="">
                                     <th class="   serial">#</th>
-                                    <th class="column-ID">ID</th>
-                                    <th class=" ">Coupon Code</th>
-                                    <th class=" ">Coupon Value</th>
-                                    <th class=" ">Coupon Type</th>
-                                    <th class=" ">Min Value</th>
+                                    <th class="column-ID">Name</th>
+                                    <th>Password</th>
+                                    <th class=" ">Email</th>
+                                    <th class=" ">Mobail</th>
+                                    <th class=" ">Manage</th>
+                                    <!-- <th class=" ">Min Value</th> -->
                                     <th class=" ">Status</th>
                                     <th class=" ">delete</th>
                                     <th class=" ">edit</th>
@@ -57,18 +59,20 @@ include("./sideber.inc.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM coupon_master ORDER BY id DESC"; //order by name DESC
                                 $resultSet = $con->query($sql);
                                 $i = 1;
                                 while ($row = $resultSet->fetch_assoc()) {
                                 ?>
                                     <tr class="">
                                         <th scope="   row" class="table-data serial"><?php echo $i++ ?></th>
-                                        <td class=" table-data  "><?php echo $row['id'] ?></td>
-                                        <td class=" table-data  "><?php echo $row['coupon_code'] ?></td>
-                                        <td class=" table-data  "><?php echo $row['coupon_value'] ?></td>
-                                        <td class=" table-data  "><?php echo $row['coupon_type'] ?></td>
-                                        <td class=" table-data  "><?php echo $row['cart_min_value'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['name'] ?></td>
+                                        <td class="table-data"><?php echo $row['password'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['email'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['mobail'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['manage'] ?></td>
+                                        <!-- <td class=" table-data  "><?php
+                                        //  echo $row['cart_min_value'] 
+                                        ?></td> -->
 
                                         <td><?php
                                             if ($row['status'] == 1) {
@@ -82,7 +86,7 @@ include("./sideber.inc.php");
 
                                             ?></td>
                                         <td><?php
-                                            echo "<a class='text-success' href='add_coupon.php?id=" . $row['id'] . "'>Edit</a>";
+                                            echo "<a class='text-success' href='vendor_management.php?id=" . $row['id'] . "'>Edit</a>";
                                             ?></td>
                                     </tr>
                                 <?php

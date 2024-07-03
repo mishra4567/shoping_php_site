@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2024 at 12:13 PM
+-- Generation Time: Jul 03, 2024 at 07:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,16 +31,22 @@ CREATE TABLE `admin` (
   `id` int(111) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(111) NOT NULL
+  `password` varchar(111) NOT NULL,
+  `role` int(11) NOT NULL,
+  `mobail` varchar(50) NOT NULL,
+  `status` int(11) NOT NULL,
+  `manage` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `name`, `email`, `password`) VALUES
-(1, 'admin', 'admin', 'admin'),
-(2, 'admin', 'admin', 'admin');
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `role`, `mobail`, `status`, `manage`) VALUES
+(1, 'admin', 'admin', 'admin', 0, '', 1, 'ADMIN'),
+(3, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'pritam', 1, '7501115937', 1, 'product meneger'),
+(4, 'amit', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'amit', 1, '7501115937', 0, 'user & contact'),
+(5, 'mishra', 'mishrapritam831@gmail.com', '4561', 1, 'Dassboard', 0, '7501115937');
 
 -- --------------------------------------------------------
 
@@ -180,7 +186,10 @@ INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_typ
 (31, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 40, 'success', 1, '2024-06-30 06:07:56', '', '', '', 3, 20, 'first10'),
 (32, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:00:48', '', '', '', 0, 0, ''),
 (33, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:02:19', '', '', '', 0, 0, ''),
-(34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60');
+(34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60'),
+(35, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 439, 'success', 1, '2024-07-01 01:55:57', '', '', '', 3, 20, 'First10'),
+(36, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 436, 'success', 1, '2024-07-01 02:15:27', '', '', '', 3, 20, 'First10'),
+(37, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2188.8, 'success', 1, '2024-07-01 02:16:37', '', '', '', 2, 547, 'First60');
 
 -- --------------------------------------------------------
 
@@ -242,7 +251,11 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `ad
 (34, 31, 3, 1, 60, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (35, 32, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (36, 33, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(37, 34, 6, 1, 3599, '0000-00-00 00:00:00', 0, 0, 0, 0);
+(37, 34, 6, 1, 3599, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(38, 35, 20, 1, 456, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(39, 35, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(40, 36, 20, 1, 456, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(41, 37, 20, 6, 456, '0000-00-00 00:00:00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -288,24 +301,26 @@ CREATE TABLE `product` (
   `meta_keyword` varchar(2000) NOT NULL,
   `tex` int(11) NOT NULL,
   `meta_title` varchar(2000) NOT NULL,
-  `best_seller` int(11) NOT NULL
+  `best_seller` int(11) NOT NULL,
+  `added_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`, `price`, `qty`, `image`, `short_desc`, `description`, `meta_desc`, `status`, `meta_keyword`, `tex`, `meta_title`, `best_seller`) VALUES
-(1, 25, 0, 'test', 568, 56, 10, '6892576093_1.jpg', 'Armchair: A chair with supports for the arms, providing additional comfort.\r\nDining Chair: Often simpler in design, these are used around a dining table and may or may not have armrests.', 'A chair is a piece of furniture designed to provide a comfortable seating arrangement for one person. Its primary components typically include a seat, backrest, armrests, and legs. Chairs can vary significantly in design, materials, and functionality, serving different purposes in various settings such as homes, offices, and public spaces.', 'My Chear', 1, 'Chear69', 10, 'Chear', 1),
-(2, 25, 4, 'Chair', 895, 90, 11, '2453624696_1.png', 'Office Chair: Designed for use at a desk, these chairs often have wheels, adjustable height, and ergonomic features to support long periods of sitting.\r\nRecliner: A chair that can tilt back, often with a footrest that extends, offering a more relaxed seating position.\r\nRocking Chair: Mounted on curved bands (rockers) that allow it to rock back and forth.', 'Chairs can be made from a variety of materials, including wood, metal, plastic, and upholstery. The choice of material affects the chair\'s durability, weight, and aesthetic appeal. Wooden chairs are classic and sturdy, metal chairs are often sleek and modern, while plastic chairs are lightweight and versatile. Upholstered chairs offer added comfort with cushioning and fabric or leather covers.', '', 1, '', 20, '', 0),
-(3, 26, 0, 'admin', 632, 60, 10, '1927891373_2.jpg', 'Rocking Chair: Mounted on curved bands (rockers) that allow it to rock back and forth.', 'Modern chair design often emphasizes ergonomics to promote good posture and reduce strain on the body. Features such as lumbar support, adjustable height, and contoured seats help in maintaining comfort, especially during prolonged use. Ergonomically designed chairs are particularly important in office environments to enhance productivity and well-being.', '', 1, '', 10, '', 0),
-(4, 25, 0, 'MAHARAJA Omega for Home, Office', 4499, 2879, 12, '2246527865_2.png', 'MAHARAJA Omega for Home, Office | Comfortable | Arm Rest | Bearing Capacity up to 200Kg Plastic Outdoor Chair  (Brown, Set of 4, Pre-assembled)', 'These plastic chairs are a wonderful addition to any home. Featuring a stylish design with an ergonomic seat back, these chairs are perfect for any hosting event. With the added benefit of being stackable, these chairs are ideal to bring out for any event where you need extra seating.', '', 1, '', 25, '', 0),
-(5, 25, 0, 'Wakefit Safari Fabric Office Executive Chair', 13299, 7313, 10, '2567909880_3.jpg', 'Wakefit Safari Fabric Office Executive Chair  (Black, Grey, Optional Installation Available)', 'Our Safari high back office chairs online come with a synchro tilt mechanism that provides coordinated movement of the seat and back to support change of posture for comfortable working throughout the day. The ergonomic backrest of these office chairs online reduces stress on your spine and lower back while the adjustable lumbar support and arms helps you check your posture. The Wakefit Safari high back office chairs online have a mesh headrest which can protect you from annoying neck and shoulder area aches that have become a common occupational hazard. They also have a wide spider base for stability and durability.', 'This is a Chear', 1, 'chear45', 5465, 'Chear', 1),
-(6, 26, 5, 'CELLBELL Desire C104 Mid Back', 9999, 3599, 10, '8179220578_4.jpg', 'CELLBELL Desire C104 Mid Back Comfortable Fabric Office Executive Chair  (Red, Optional Installation Available)', '1) Ergonomic Sitting Position : C104 Chair provides you best in class sitting postures for extra comfort. 2) Seat and Base : 2 inch Thick Foam Cushion Padded Seat for your long hours comfort | Pneumatic Hydraulic with 4 inch seat height adjustment | Breathable contoured Mesh Back Fabric | Chair comes with Sturdy Metal Base for extra strength. 3) Lumbar Adjustments : Lumbar adjustments can be pushed upward, down for better supports to the back. It also features locking back support lever adjustment, if you wish to relax or stretch legs! 4) Arm-rest : Padded Arm-rest. 5) Height Suitability : 5 ft to 6 ft. 6) Weight Capacity : 105 Kgs. 7) BIFMA Certified. 8) Warranty : 12 Months Warranty against Manufacturing Defects.', '', 1, '', 565, '', 0),
-(7, 27, 0, 'GREEN SOUL Seoul-X Mid Back Ergonomic', 5980, 3, 10, '4124329009_5.jpg', 'GREEN SOUL Seoul-X Mid Back Ergonomic|Home,WFH|Moulded Foam|Extra Comfort Fabric Office Adjustable Arm Chair  (Black, Optional Installation Available)', 'Introducing the Green Soul Seoul-X Mid Back Ergonomic Office Chair. With its premium fabric upholstery on the chair back and seat, this chair offers a touch of luxury to your workspace. The wide molded foam chair seat provides exceptional comfort and support throughout the day. The chair frame is made of solid wood, ensuring long-lasting durability. Equipped with fixed PP armrests, this chair offers added support to your arms and shoulders. The push back mechanism allows the chair back to rock between 90-120 degrees, giving you the flexibility to find your preferred angle for relaxation or focused work. The Class 3 gas lift ensures smooth height adjustment, while the heavy-duty metal wheelbase and 50mm nylon dual castor wheels provide stability and effortless mobility on various floor surfaces. The Seoul-X chair has a weight holding capacity of 90 kgs, . It comes with a 15 Months warranty, giving you peace of mind. The chair is designed for easy assembly with the included DIY kit.', '', 1, '', 89, '', 0),
-(16, 25, 4, 'u65ytehdgfdc', 565654, 6565, 2, '3679708304_651584201_Floral-Embroidered-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
-(17, 27, 1, 'awrsedtfghyj', 565654, 6565, 2, '7803170230_309027777_Floral-Print-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1),
-(18, 32, 7, 'tshirt', 5654640, 545, 10, '7585133237_931830512__8-(1)-E5x-104831-NJD.jpg', '', '', '', 1, '', 0, '', 1);
+INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`, `price`, `qty`, `image`, `short_desc`, `description`, `meta_desc`, `status`, `meta_keyword`, `tex`, `meta_title`, `best_seller`, `added_by`) VALUES
+(1, 25, 0, 'test', 568, 56, 10, '6892576093_1.jpg', 'Armchair: A chair with supports for the arms, providing additional comfort.\r\nDining Chair: Often simpler in design, these are used around a dining table and may or may not have armrests.', 'A chair is a piece of furniture designed to provide a comfortable seating arrangement for one person. Its primary components typically include a seat, backrest, armrests, and legs. Chairs can vary significantly in design, materials, and functionality, serving different purposes in various settings such as homes, offices, and public spaces.', 'My Chear', 1, 'Chear69', 10, 'Chear', 1, 0),
+(2, 25, 4, 'Chair', 895, 90, 11, '2453624696_1.png', 'Office Chair: Designed for use at a desk, these chairs often have wheels, adjustable height, and ergonomic features to support long periods of sitting.\r\nRecliner: A chair that can tilt back, often with a footrest that extends, offering a more relaxed seating position.\r\nRocking Chair: Mounted on curved bands (rockers) that allow it to rock back and forth.', 'Chairs can be made from a variety of materials, including wood, metal, plastic, and upholstery. The choice of material affects the chair\'s durability, weight, and aesthetic appeal. Wooden chairs are classic and sturdy, metal chairs are often sleek and modern, while plastic chairs are lightweight and versatile. Upholstered chairs offer added comfort with cushioning and fabric or leather covers.', '', 1, '', 20, '', 0, 0),
+(3, 26, 0, 'admin', 632, 60, 10, '1927891373_2.jpg', 'Rocking Chair: Mounted on curved bands (rockers) that allow it to rock back and forth.', 'Modern chair design often emphasizes ergonomics to promote good posture and reduce strain on the body. Features such as lumbar support, adjustable height, and contoured seats help in maintaining comfort, especially during prolonged use. Ergonomically designed chairs are particularly important in office environments to enhance productivity and well-being.', '', 1, '', 10, '', 0, 0),
+(4, 25, 0, 'MAHARAJA Omega for Home, Office', 4499, 2879, 12, '2246527865_2.png', 'MAHARAJA Omega for Home, Office | Comfortable | Arm Rest | Bearing Capacity up to 200Kg Plastic Outdoor Chair  (Brown, Set of 4, Pre-assembled)', 'These plastic chairs are a wonderful addition to any home. Featuring a stylish design with an ergonomic seat back, these chairs are perfect for any hosting event. With the added benefit of being stackable, these chairs are ideal to bring out for any event where you need extra seating.', '', 1, '', 25, '', 0, 0),
+(5, 25, 0, 'Wakefit Safari Fabric Office Executive Chair', 13299, 7313, 10, '2567909880_3.jpg', 'Wakefit Safari Fabric Office Executive Chair  (Black, Grey, Optional Installation Available)', 'Our Safari high back office chairs online come with a synchro tilt mechanism that provides coordinated movement of the seat and back to support change of posture for comfortable working throughout the day. The ergonomic backrest of these office chairs online reduces stress on your spine and lower back while the adjustable lumbar support and arms helps you check your posture. The Wakefit Safari high back office chairs online have a mesh headrest which can protect you from annoying neck and shoulder area aches that have become a common occupational hazard. They also have a wide spider base for stability and durability.', 'This is a Chear', 1, 'chear45', 5465, 'Chear', 1, 0),
+(6, 26, 5, 'CELLBELL Desire C104 Mid Back', 9999, 3599, 10, '8179220578_4.jpg', 'CELLBELL Desire C104 Mid Back Comfortable Fabric Office Executive Chair  (Red, Optional Installation Available)', '1) Ergonomic Sitting Position : C104 Chair provides you best in class sitting postures for extra comfort. 2) Seat and Base : 2 inch Thick Foam Cushion Padded Seat for your long hours comfort | Pneumatic Hydraulic with 4 inch seat height adjustment | Breathable contoured Mesh Back Fabric | Chair comes with Sturdy Metal Base for extra strength. 3) Lumbar Adjustments : Lumbar adjustments can be pushed upward, down for better supports to the back. It also features locking back support lever adjustment, if you wish to relax or stretch legs! 4) Arm-rest : Padded Arm-rest. 5) Height Suitability : 5 ft to 6 ft. 6) Weight Capacity : 105 Kgs. 7) BIFMA Certified. 8) Warranty : 12 Months Warranty against Manufacturing Defects.', '', 1, '', 565, '', 0, 0),
+(7, 27, 0, 'GREEN SOUL Seoul-X Mid Back Ergonomic', 5980, 3, 10, '4124329009_5.jpg', 'GREEN SOUL Seoul-X Mid Back Ergonomic|Home,WFH|Moulded Foam|Extra Comfort Fabric Office Adjustable Arm Chair  (Black, Optional Installation Available)', 'Introducing the Green Soul Seoul-X Mid Back Ergonomic Office Chair. With its premium fabric upholstery on the chair back and seat, this chair offers a touch of luxury to your workspace. The wide molded foam chair seat provides exceptional comfort and support throughout the day. The chair frame is made of solid wood, ensuring long-lasting durability. Equipped with fixed PP armrests, this chair offers added support to your arms and shoulders. The push back mechanism allows the chair back to rock between 90-120 degrees, giving you the flexibility to find your preferred angle for relaxation or focused work. The Class 3 gas lift ensures smooth height adjustment, while the heavy-duty metal wheelbase and 50mm nylon dual castor wheels provide stability and effortless mobility on various floor surfaces. The Seoul-X chair has a weight holding capacity of 90 kgs, . It comes with a 15 Months warranty, giving you peace of mind. The chair is designed for easy assembly with the included DIY kit.', '', 1, '', 89, '', 0, 0),
+(16, 25, 4, 'u65ytehdgfdc', 565654, 6565, 2, '3679708304_651584201_Floral-Embroidered-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1, 0),
+(17, 27, 1, 'awrsedtfghyj', 565654, 6565, 2, '7803170230_309027777_Floral-Print-Polo-T-shirt.jpg', '', '', '', 1, '', 0, '', 1, 0),
+(18, 32, 7, 'tshirt', 5654640, 545, 10, '7585133237_931830512__8-(1)-E5x-104831-NJD.jpg', '', '', '', 1, '', 0, '', 1, 0),
+(20, 32, 7, 'test desc', 6456, 456, 10, '4299934273_matthew-hamilton-3RlGBpFeoQg-unsplash.jpg', 'test desc', 'test desc', '', 1, '', 0, '', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -403,7 +418,8 @@ INSERT INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
 (38, 3, 1, '2024-06-18 04:49:47'),
 (39, 3, 4, '2024-06-18 04:49:48'),
 (45, 13, 5, '2024-06-23 04:28:13'),
-(46, 13, 16, '2024-06-25 07:45:10');
+(46, 13, 16, '2024-06-25 07:45:10'),
+(47, 13, 7, '2024-07-01 05:08:42');
 
 --
 -- Indexes for dumped tables
@@ -489,7 +505,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -513,13 +529,13 @@ ALTER TABLE `coupon_master`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `order_status`
@@ -531,7 +547,7 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `shiprockettoken`
@@ -555,7 +571,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

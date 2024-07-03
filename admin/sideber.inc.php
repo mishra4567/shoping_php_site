@@ -66,8 +66,8 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-0"><?php echo $_SESSION['ADMIN_USERNAME'] ?></h6>
+                        <span><?php echo $_SESSION['ADMIN_MENEGE'] ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -81,12 +81,19 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
                         </div>
                     </div> -->
                     <a href="./product.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product Master</a>
+                    <?php if($_SESSION['ADMIN_ROLE']==1){ ?>
+                    <a href="./order_vendor.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>order Master</a>
+                    <?php  }else{ ?>
+                    <a href="./order.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>order Master</a>
+                    <?php  }?>
+                    <?php if($_SESSION['ADMIN_ROLE']!=1){ ?>
                     <a href="./categories.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Categories Master</a>
                     <a href="./sub_categories.php" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Sub Categories</a>
-                    <a href="./order.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>order Master</a>
                     <a href="./coupon.php" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Coupon Master</a>
                     <a href="./user-master.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>User Master</a>
+                    <a href="./vendor.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vendor Master</a>
                     <a href="./contact.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Contact Us</a>
+                    <?php } ?>
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">

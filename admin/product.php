@@ -1,6 +1,15 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+
+$condition='';
+$condition1='';
+if($_SESSION['ADMIN_ROLE']==1){
+    $condition="AND product.added_by='".$_SESSION['ADMIN_ID']."'";
+    $condition1="AND added_by='".$_SESSION['ADMIN_ID']."'";
+}
+
+
 if (isset($_GET['type']) && $_GET['type'] != '') {
     $type = get_safe_value($con, $_GET['type']);
     if ($type == 'status') {
@@ -11,15 +20,17 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
         } else {
             $status = '0';
         }
-        $update_status_sql = "UPDATE product SET status='$status' WHERE id='$id'";
+        $update_status_sql = "UPDATE product SET status='$status' WHERE id='$id' $condition1 ";
         mysqli_query($con, $update_status_sql);
     }
     if ($type == 'delete') {
         $id = get_safe_value($con, $_GET['id']);
-        $delete_sql = "DELETE FROM product WHERE id='$id'";
+        $delete_sql = "DELETE FROM product WHERE id='$id' $condition1 ";
         mysqli_query($con, $delete_sql);
     }
 }
+
+$sql = "SELECT product.*,categories.categories FROM product,categories WHERE product.categories_id=categories.id $condition ORDER BY product.id DESC"; //order by name DESC
 include("./sideber.inc.php");
 ?>
 <style>
@@ -63,7 +74,7 @@ include("./sideber.inc.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT product.*,categories.categories FROM product,categories WHERE product.categories_id=categories.id ORDER BY product.id DESC"; //order by name DESC
+
                                 $resultSet = $con->query($sql);
                                 $i = 1;
                                 while ($row = $resultSet->fetch_assoc()) {

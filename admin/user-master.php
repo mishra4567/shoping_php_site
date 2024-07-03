@@ -1,16 +1,18 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
-if(isset($_GET['type'])&& $_GET['type']!=''){
-    $type=get_safe_value($con,$_GET['type']);
-    if($type=='delete'){
-        $id=get_safe_value($con,$_GET['id']);
-        $delete_sql="DELETE FROM users WHERE id='$id'";
-        mysqli_query($con,$delete_sql);
+isAdmin();
+
+if (isset($_GET['type']) && $_GET['type'] != '') {
+    $type = get_safe_value($con, $_GET['type']);
+    if ($type == 'delete') {
+        $id = get_safe_value($con, $_GET['id']);
+        $delete_sql = "DELETE FROM users WHERE id='$id'";
+        mysqli_query($con, $delete_sql);
     }
 }
-$sql="SELECT * FROM users ORDER BY id DESC";
-$result=mysqli_query($con,$sql);
+$sql = "SELECT * FROM users ORDER BY id DESC";
+$result = mysqli_query($con, $sql);
 
 include("./sideber.inc.php");
 ?>
@@ -44,9 +46,9 @@ include("./sideber.inc.php");
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $i=1;
-                                while($row=mysqli_fetch_assoc($result)){
+                                <?php
+                                $i = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr>
                                         <td class="serial"><?php echo $i++ ?></td>
@@ -55,16 +57,15 @@ include("./sideber.inc.php");
                                         <td><?php echo $row['email'] ?></td>
                                         <td><?php echo $row['mobail'] ?></td>
                                         <td><?php echo $row['added_on'] ?></td>
-                                        <td><?php 
+                                        <td><?php
                                             echo "<a class='text-danger' href='?type=delete&id=" . $row['id'] . "'>Delete</a>";
-                                        ?></td>
+                                            ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

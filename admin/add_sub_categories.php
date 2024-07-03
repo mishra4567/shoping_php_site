@@ -1,6 +1,7 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+isAdmin();
 $categories = '';
 $sub_categories = '';
 $msg = '';

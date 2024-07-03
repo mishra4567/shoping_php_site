@@ -1,6 +1,7 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+isAdmin();
 $coupon_code = '';
 $coupon_value = '';
 $coupon_type = '';

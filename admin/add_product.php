@@ -1,6 +1,17 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+
+
+$condition='';
+$condition1='';
+if($_SESSION['ADMIN_ROLE']==1){
+    $condition="AND product.added_by='".$_SESSION['ADMIN_ID']."'";
+    $condition1="AND added_by='".$_SESSION['ADMIN_ID']."'";
+}
+
+
+
 $categories_id = '';
 $name = '';
 $mrp = '';
@@ -24,7 +35,7 @@ $msg = '';
 if (isset($_GET['id']) && $_GET['id'] != '') {
     $image_required = '';
     $id = get_safe_value($con, $_GET['id']);
-    $result = mysqli_query($con, "SELECT * FROM product WHERE id='$id'");
+    $result = mysqli_query($con, "SELECT * FROM product WHERE id='$id' $condition1 ");
     $check = mysqli_num_rows($result);
     if ($check > 0) {
         $row = mysqli_fetch_assoc($result);
@@ -64,7 +75,7 @@ if (isset($_POST['submit'])) {
     $meta_title = get_safe_value($con, $_POST['meta_title']);
     $best_seller = get_safe_value($con, $_POST['best_seller']);
 
-    $result = mysqli_query($con, "SELECT * FROM product WHERE name='$name'");
+    $result = mysqli_query($con, "SELECT * FROM product WHERE name='$name' $condition1 ");
     $check = mysqli_num_rows($result);
     if ($check > 0) {
         if (isset($_GET['id']) && $_GET['id'] != '') {
@@ -102,8 +113,8 @@ if (isset($_POST['submit'])) {
         } else {
             $image = rand(1111111111, 9999999999) . '_' . $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], PRODUCT_IMAGE_SERVER_PATH . $image);
-            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,best_seller,sub_categories_id,status) VALUE 
-            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','$best_seller','$sub_categories_id','0')");
+            mysqli_query($con, "INSERT INTO product (categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,tex,image,best_seller,sub_categories_id,added_by,status) VALUE 
+            ('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword','$tex','$image','$best_seller','$sub_categories_id','".$_SESSION['ADMIN_ID']."','0')");
         }
         header('location:./product.php');
         die();

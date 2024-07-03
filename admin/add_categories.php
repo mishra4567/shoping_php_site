@@ -1,6 +1,7 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+isAdmin();
 $categories = '';
 $msg = '';
 if (isset($_GET['id']) && $_GET['id'] != '') {

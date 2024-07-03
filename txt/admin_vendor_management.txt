@@ -1,0 +1,18 @@
+<div class="form-group mt-3 ">
+                                <label for="coupon_type" class="from-control-label fw -bold">Coupon Type</label>
+                                <select name="coupon_type" id="" class="form-control" required>
+                                    <option value="">Select</option>
+                                    <?php
+                                    if ($coupon_type == 'Percentage') {
+                                        echo '<option value="Percentage" selected>Percentage</option>
+                                              <option value="Rupee">Rupee</option>';
+                                    } elseif ($coupon_type == 'Rupee') {
+                                        echo '<option value="Percentage">Percentage</option>
+                                              <option value="Rupee" selected>Rupee</option>';
+                                    } else {
+                                        echo '<option value="Percentage">Percentage</option>
+                                              <option value="Rupee">Rupee</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
