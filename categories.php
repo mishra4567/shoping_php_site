@@ -10,9 +10,9 @@ include_once("./top-inc.php");
     <?php
 // }
 $sub_categories='';
-$cat_id = mysqli_real_escape_string($con, $_GET['id']);
+$cat_id = get_safe_value($con, $_GET['id']);
 if(isset($_GET['sub_categories'])){
-$sub_categories = mysqli_real_escape_string($con, $_GET['sub_categories']);
+$sub_categories = get_safe_value($con, $_GET['sub_categories']);
 }
 $sort_order = '';
 $price_high_selected = "";
@@ -21,7 +21,7 @@ $new_selected = "";
 $old_selected = "";
 
 if (isset($_GET['sort'])) {
-    $sort = mysqli_real_escape_string($con, $_GET['sort']);
+    $sort = get_safe_value($con, $_GET['sort']);
     if ($sort == "price_high") {
         $sort_order = " ORDER BY product.price DESC ";
         $price_high_selected = "selected";

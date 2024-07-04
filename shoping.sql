@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 07:20 AM
+-- Generation Time: Jul 04, 2024 at 05:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -99,7 +99,13 @@ INSERT INTO `contact_us` (`id`, `name`, `email`, `mobail`, `comment`, `added_on`
 (2, 'pritam', 'pritam@gmail.com', '9609379300', 'Test Query', '2024-05-01 00:09:10'),
 (3, 'Pritam Mishra', 'a@gmail.com', '6745645', 'ughjbjh', '2024-05-18 08:27:50'),
 (4, 'Pritam Mishra', 'mishrapritam831@gmail.com', '656533', 'gfvghvmhn', '2024-05-19 06:35:22'),
-(5, 'admin', 'mishrapritam831@gmail.com', '64645645645', 'ytdftyfdjhgf', '2024-05-19 06:38:39');
+(5, 'admin', 'mishrapritam831@gmail.com', '64645645645', 'ytdftyfdjhgf', '2024-05-19 06:38:39'),
+(6, 'gbghgg', 'ytfhgf', '35645', 'uytgugjg', '2024-07-04 12:52:02'),
+(7, 'u65ytehdgfdc', 'mishrapritam831@gmail.com', '7501115937', 'uyjfghfvmguikjhg', '2024-07-04 12:57:01'),
+(8, 'u65ytehdgfdc', 'mishrapritam069@gmail.com', '7501115937', 'select', '2024-07-04 12:58:27'),
+(9, 'u65ytehdgfdc', 'mishrapritam069@gmail.com', '7501115937', '<select><option>select</option></select>', '2024-07-04 01:02:59'),
+(10, 'u65ytehdgfdc', 'mishrapritam069@gmail.com', '7501115937', 'select', '2024-07-04 01:03:36'),
+(11, 'u65ytehdgfdc', 'mishrapritam831@gmail.com', '7501115937', 'select', '2024-07-04 01:04:18');
 
 -- --------------------------------------------------------
 
@@ -189,7 +195,8 @@ INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_typ
 (34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60'),
 (35, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 439, 'success', 1, '2024-07-01 01:55:57', '', '', '', 3, 20, 'First10'),
 (36, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 436, 'success', 1, '2024-07-01 02:15:27', '', '', '', 3, 20, 'First10'),
-(37, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2188.8, 'success', 1, '2024-07-01 02:16:37', '', '', '', 2, 547, 'First60');
+(37, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2188.8, 'success', 1, '2024-07-01 02:16:37', '', '', '', 2, 547, 'First60'),
+(38, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', -456, 'success', 1, '2024-07-04 05:15:33', '', '', '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -255,7 +262,8 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`, `ad
 (38, 35, 20, 1, 456, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (39, 35, 7, 1, 3, '0000-00-00 00:00:00', 0, 0, 0, 0),
 (40, 36, 20, 1, 456, '0000-00-00 00:00:00', 0, 0, 0, 0),
-(41, 37, 20, 6, 456, '0000-00-00 00:00:00', 0, 0, 0, 0);
+(41, 37, 20, 6, 456, '0000-00-00 00:00:00', 0, 0, 0, 0),
+(42, 38, 20, -1, 456, '0000-00-00 00:00:00', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -392,7 +400,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobail`, `added_on`) VA
 (5, 'admin', 'a@gmail.com1234', '54545', '46464654654', '2024-05-20 06:41:58'),
 (6, 'admin', 'z@gmail.com', '54545', '46464654654', '2024-05-20 06:42:52'),
 (7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37'),
-(13, 'awrsedtfghyj', 'gyhfvghfcvyttfyghfvgh@gmail.com', '789456', '9609379300', '2024-06-16 06:57:54');
+(13, 'sity', 'gyhfvghfcvyttfyghfvgh@gmail.com', '789456', '9609379300', '2024-06-16 06:57:54');
 
 -- --------------------------------------------------------
 
@@ -511,31 +519,31 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `contact_us`
 --
 ALTER TABLE `contact_us`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `coupon_master`
 --
 ALTER TABLE `coupon_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `order_status`
