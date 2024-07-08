@@ -9,9 +9,6 @@ if($_SESSION['ADMIN_ROLE']==1){
     $condition="AND product.added_by='".$_SESSION['ADMIN_ID']."'";
     $condition1="AND added_by='".$_SESSION['ADMIN_ID']."'";
 }
-
-
-
 $categories_id = '';
 $name = '';
 $mrp = '';

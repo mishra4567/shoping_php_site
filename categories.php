@@ -2,13 +2,13 @@
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
 include_once("./top-inc.php");
-// if(isset($_GET['id']) && $_GET['id'] !=''){
+if(!isset($_GET['id']) && $_GET['id'] !=''){
     ?>
     <script>
-        // window.location.href='index.php';
+        window.location.href='index.php';
     </script>
     <?php
-// }
+}
 $sub_categories='';
 $cat_id = get_safe_value($con, $_GET['id']);
 if(isset($_GET['sub_categories'])){
@@ -39,7 +39,7 @@ if (isset($_GET['sort'])) {
         $old_selected = "selected";
     }
 }
-if ($cat_id > 0) {
+if ($cat_id > 0){
     $get_product = get_product($con, '', $cat_id, '', '', $sort_order,'',$sub_categories);
 } else {
 ?>
