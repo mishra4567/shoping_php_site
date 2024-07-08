@@ -41,6 +41,8 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <!-- custom css -->
+     <link rel="stylesheet" href="./css/custom.css">
 </head>
 
 <body>

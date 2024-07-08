@@ -10,3 +10,10 @@ function get_sub_cat(sub_cat_id){
         }
     })
 }
+// select img
+let profilePic=document.getElementById("profilePic");
+let InputFile=document.getElementById("input-img");
+
+InputFile.onchange=function(){
+    profilePic.src=URL.createObjectURL(InputFile.files[0]);
+}

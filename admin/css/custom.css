@@ -1,0 +1,17 @@
+/* defolt img */
+.defolt-img {
+    width: 290px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+.input-img{
+    display: block;
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+}
+#input-img{
+    display: none;
+}
