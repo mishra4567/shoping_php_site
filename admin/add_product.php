@@ -24,7 +24,7 @@ $meta_keyword = '';
 $tex = '';
 $best_seller = '';
 $sub_categories_id = '';
-$profile_img='';
+$profile_img = '';
 
 $image_required = 'required';
 $msg = '';
@@ -42,7 +42,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
         $name = $row['name'];
         $mrp = $row['mrp'];
         $price = $row['price'];
-        $image=$row['image'];
+        $image = $row['image'];
         $qty = $row['qty'];
         $short_desc = $row['short_desc'];
         $description = $row['description'];
@@ -131,7 +131,7 @@ include("./sideber.inc.php");
     <!-- Navbar End -->
     <!-- Blank Start -->
     <div class="container-fluid pt-4 px-4">
-        <div class="  bg-light rounded align-items-center justify-content-center mx-0">
+        <div class=" row bg-light rounded align-items-center justify-content-center mx-0">
             <div class="mt-3">Product <a href="./product.php" class="text-primary ">../privais</a></div>
             <div class="text-start mt-3">
                 <form method="post" enctype="multipart/form-data">
@@ -254,12 +254,12 @@ include("./sideber.inc.php");
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
         </div>
-        </form>
     </div>
-</div>
-</div>
+
+
 <!-- Blank End -->
 
 
