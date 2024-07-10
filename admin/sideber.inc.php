@@ -96,15 +96,14 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
                     <a href="./vendor.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vendor Master</a>
                     <a href="./contact.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Contact Us</a>
                     <?php } ?>
-                    <a href="./blank.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Blank Page</a>
-                    <!-- <div class="nav-item dropdown">
+                    <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="signin.html" class="dropdown-item">Sign In</a>
-                            <a href="signup.html" class="dropdown-item">Sign Up</a>
-                            <a href="404.html" class="dropdown-item">404 Error</a>
-                            <a href="blank.html" class="dropdown-item">Blank Page</a>
+                            <a href="./blankProductAdd.php" class="dropdown-item">Product add</a>
+                            <!-- <a href="signup.html" class="dropdown-item">Sign Up</a> -->
+                            <!-- <a href="404.html" class="dropdown-item">404 Error</a> -->
+                            <a href="./blank.php" class="dropdown-item">Blank Page</a>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </nav>
