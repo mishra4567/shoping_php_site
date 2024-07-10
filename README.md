@@ -39,3 +39,6 @@ your password send your email id
 shiprocket--API 
 not working on xampp
 And this api code cannot work
+
+
+shere option work on domin name and server
