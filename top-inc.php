@@ -28,12 +28,17 @@ $mypage = $script_name_arr[count($script_name_arr) - 1];
 $meta_title = "Ecom Web";
 $meta_desc = "Shopping";
 $meta_keyword = "";
+$meta_url=SITE_PATH;
+$meta_image="";
 if ($mypage == 'product-details.php') {
     $product_id = get_safe_value($con, $_GET['id']);
     $product_meta = mysqli_fetch_assoc(mysqli_query($con, "SELECT * FROM product WHERE id='$product_id'"));
     $meta_title = $product_meta['meta_title'];
     $meta_desc = $product_meta['meta_desc'];
     $meta_keyword = $product_meta['meta_keyword'];
+    $meta_image_name = $product_meta['image'];
+    $meta_url=SITE_PATH.'product-details.php?id='.$product_id;
+    $meta_image=PRODUCT_IMAGE_SITE_PATH.$meta_image_name;
 }
 if ($mypage == 'contact.php') {
     $meta_title = "Contact Us";
@@ -50,7 +55,12 @@ if ($mypage == 'contact.php') {
     <meta name="description" content="<?php echo $meta_desc ?>">
     <meta name="keywords" content="<?php echo $meta_keyword ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!-- sosial media property -->
+    <meta property="og:title" content="<?php echo $meta_title ?>">
+    <meta property="og:image" content="<?php echo $meta_image ?>">
+    <meta property="og:url" content="<?php echo $meta_url ?>">
+    <meta property="og:site_name" content="<?php echo SITE_PATH ?>">
+    <!--  -->
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -109,9 +119,9 @@ if ($mypage == 'contact.php') {
                                                 if (mysqli_num_rows($sub_cat_res) > 0) {
                                                 ?>
                                                     <ul class="dropdown">
-                                                        <?php 
-                                                        while($sub_cat_rows=mysqli_fetch_assoc($sub_cat_res)){
-                                                            echo '<li><a href="categories.php?id='.$list['id'].'&sub_categories='.$sub_cat_rows['id'].'">'.$sub_cat_rows['sub_categories'].'</a></li>';
+                                                        <?php
+                                                        while ($sub_cat_rows = mysqli_fetch_assoc($sub_cat_res)) {
+                                                            echo '<li><a href="categories.php?id=' . $list['id'] . '&sub_categories=' . $sub_cat_rows['id'] . '">' . $sub_cat_rows['sub_categories'] . '</a></li>';
                                                         }
                                                         ?>
                                                     </ul>

@@ -117,3 +117,16 @@
 }
 
  */
+#social_share_box{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+ }
+ .social-icon{
+  height: 20px;
+  width: 35px;
+ }
+ .whats-social-icon{
+  height: 20px;
+  width: 70px;
+ }

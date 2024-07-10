@@ -20,7 +20,11 @@ if (isset($_GET['id'])) {
     </script>
 <?php
 }
-
+$main_url=urlencode($meta_url);
+$main_title=urlencode($meta_title);
+$facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=$main_url";
+$twitterShareUrl = "https://twitter.com/intent/tweet?text=$main_title&url=$main_url";
+$whatsappShareUrl = "https://wa.me/?text=$main_title%20$main_url";
 ?>
 <!-- End Offset Wrapper -->
 <!-- Start Bradcaump area -->
@@ -74,31 +78,30 @@ if (isset($_GET['id'])) {
                         <p class="pro__info"><?php echo $get_product['0']['short_desc'] ?></p>
                         <div class="ht__pro__desc">
                             <div class="sin__desc">
-                                <?php 
-                                $productSoldQtyByProductId=productSoldQtyByProductId($con,$get_product['0']['id']);
-                                $pending_qty=($get_product['0']['qty']-$productSoldQtyByProductId);
-
-                                $cart_show='yes';
-                                if($get_product['0']['qty']>$productSoldQtyByProductId){
-                                    $stock='In Stock';
-                                }else{
-                                    $stock='Not in Stock';
-                                    $cart_show='';
+                                <?php
+                                $productSoldQtyByProductId = productSoldQtyByProductId($con, $get_product['0']['id']);
+                                $pending_qty = ($get_product['0']['qty'] - $productSoldQtyByProductId);
+                                $cart_show = 'yes';
+                                if ($get_product['0']['qty'] > $productSoldQtyByProductId) {
+                                    $stock = 'In Stock';
+                                } else {
+                                    $stock = 'Not in Stock';
+                                    $cart_show = '';
                                 }
                                 ?>
                                 <p><span>Availability:</span><?php echo $stock ?> </p>
                             </div>
                             <div class="htc__select__option">
                                 <p><span>Qty:</span></p>
-                            <?php if($cart_show!=''){ ?>
-                                <p>
-                                    <select class="ht__select" id="qty">
-                                        <?php for($i=1;$i<=$pending_qty;$i++){ ?>
-                                        <option><?php echo $i ?></option>
-                                        <?php }?>
-                                    </select>
-                                </p>
-                            <?php }?>
+                                <?php if ($cart_show != '') { ?>
+                                    <p>
+                                        <select class="ht__select" id="qty">
+                                            <?php for ($i = 1; $i <= $pending_qty; $i++) { ?>
+                                                <option><?php echo $i ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </p>
+                                <?php } ?>
                             </div>
                             <div class="sin__desc align--left">
                                 <p><span>Categories:</span></p>
@@ -106,15 +109,19 @@ if (isset($_GET['id'])) {
                                     <li><a href="#"><?php echo $get_product['0']['categories'] ?>,</a></li>
                                 </ul>
                             </div>
-                            <?php if($cart_show!=''){ ?>
-                            <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id'] ?>','add')">Add To Cart</a>
+                            <?php if ($cart_show != '') { ?>
+                                <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id'] ?>','add')">Add To Cart</a>
                             <?php } ?>
+                        </div>
+                        <div id="social_share_box">
+                            <a target="_blank" href="<?php echo $facebookShareUrl ?> " class="social-icon" alt=""><img src="./images/icons/download.png" alt=""></a>
+                            <a target="_blank" href="<?php echo $whatsappShareUrl ?> " class="whats-social-icon"><img src="./images/icons/download (1).png" alt=""></a>
+                            <a target="_blank" href="<?php echo $twitterShareUrl ?>"  class="social-icon"><img src="./images/icons/12452418.png" alt=""></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <!-- End Product Details Top -->
 </section>
