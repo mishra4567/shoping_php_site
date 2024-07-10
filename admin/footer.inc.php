@@ -38,7 +38,17 @@ require_once("./inc/connection.inc.php")
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <!-- custom js -->
-     <script src="./js/custom.js"></script>
+     <script >
+                $(document).ready(function(){
+            $("#checkAll").click(function(){
+                if($(this).is(":checked")){
+                    $(".checkItem").prop('checked',true);
+                }else{
+                    $(".checkItem").prop('checked',false);
+                }
+            });
+        });
+     </script>
 </body>
 
 </html>

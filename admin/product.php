@@ -40,7 +40,14 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
         mysqli_query($con, $delete_sql);
     }
 }
-
+if(isset($_POST['de_submit'])){
+    if(isset($_POST['id'])){
+        foreach($_POST['id'] as $id){
+            $query="DELETE FROM product WHERE id='$id'";
+            mysqli_query($con,$query);
+        }
+    }
+}
 $sql = "SELECT product.*,categories.categories FROM product,categories WHERE product.categories_id=categories.id $condition ORDER BY product.id DESC"; //order by name DESC
 include("./sideber.inc.php");
 ?>
@@ -60,97 +67,107 @@ include("./sideber.inc.php");
             <div>Product <a href="./add_product.php" class="text-primary">Add Product</a></div>
             <div class="">
                 <div class="table-scroll">
-                    <!-- <form method="post"> -->
-                    <table class="table table-striped table-condensed">
-                        <thead>
-                            <tr class="">
-                                <th class="   serial">#</th>
-                                <th class="column-ID">ID</th>
-                                <th class=" ">Categories Id</th>
-                                <th class=" ">image</th>
-                                <th class=" ">name</th>
-                                <th class=" ">mrp</th>
-                                <th class=" ">price</th>
-                                <th class=" ">qty</th>
-                                <!-- <th class="column ">short_desc</th> -->
-                                <!-- <th class="column ">Description</th> -->
-                                <!-- <th class="column ">meta_title</th> -->
-                                <!-- <th class="column ">meta_desc</th> -->
-                                <!-- <th class="column ">meta_keyword</th> -->
-                                <th class=" ">tex</th>
-                                <th class=" ">Best Seller</th>
-                                <th class=" ">Status</th>
-                                <th class=" ">delete</th>
-                                <th class=" ">edit</th>
+                    <form action="" method="post">
+                        <table class="table">
+                            <tr>
+                                <td><label for="checkAll" class="multi_select ">Select all</label></td>
+                                <td>Multi Action:-</td>
+                                <!-- <td><input type="submit" name="submit" class="multi_select text-success" value="Best Seller all" onclick="return confirm('Are you sure want to delete')"></td> -->
+                                <td><input type="submit" name="de_submit" class="multi_select text-danger" value="Delete all" onclick="return confirm('Are you sure want to delete')"></td>
+                                <!-- <td><input type="submit" name="se_submit" class="multi_select text-primary" value="Status all" onclick="return confirm('Are you sure want to delete')"></td> -->
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-
-                            $resultSet = $con->query($sql);
-                            $i = 1;
-                            while ($row = $resultSet->fetch_assoc()) {
-                            ?>
+                        </table>
+                        <table class="table table-striped table-condensed">
+                            <thead>
                                 <tr class="">
-                                    <th scope="   row" class="table-data serial"><?php echo $i++ ?></th>
-                                    <td class=" table-data  "><?php echo $row['id'] ?></td>
-                                    <td class=" table-data  "><?php echo $row['categories'] ?></td>
-                                    <td class=" table-data  "><img class="product_img" src="<?php echo PRODUCT_IMAGE_SITE_PATH . $row['image'] ?>" alt="Product"></td>
-                                    <td class=" table-data  "><?php echo $row['name'] ?></td>
-                                    <td class=" table-data  "><?php echo $row['price'] ?></td>
-                                    <td class=" table-data  "><?php echo $row['mrp'] ?></td>
-                                    <td class=" table-data  "><?php echo $row['qty'] ?><br><br>
-                                        <?php $productSoldQtyByProductId = productSoldQtyByProductId($con, $row['id']);
-                                        $pending_qty = ($row['qty'] - $productSoldQtyByProductId)
-                                        ?>
-                                        Pending Qty:<?php echo $pending_qty ?>
-                                    </td>
-                                    <!-- <td class=" table-data  "><?php
-                                                                    // echo $row['short_desc']
-                                                                    ?></td> -->
-                                    <!-- <td class=" table-data  "><?php
-                                                                    // echo $row['description'] 
-                                                                    ?></td> -->
-                                    <!-- <td class=" table-data  "><?php
-                                                                    // echo $row['meta_title'] 
-                                                                    ?></td> -->
-                                    <!-- <td class=" table-data  "><?php
-                                                                    // echo $row['meta_desc'] 
-                                                                    ?></td> -->
-                                    <!-- <td class=" table-data  "><?php
-                                                                    // echo $row['meta_keyword'] 
-                                                                    ?></td> -->
-                                    <td class=" table-data  "><?php echo $row['tex'] ?></td>
-                                    <td><?php
-                                        if ($row['best_seller'] == 1) {
-                                            echo "<a class='text-success' href='?type=best_seller&bestSeller=deactive&id=" . $row['id'] . "'>Active</a>&nbsp;";
-                                        } else {
-                                            echo "<a class='text-info'    href='?type=best_seller&bestSeller=active&id=" . $row['id'] . "'>Deactive</a>&nbsp;";
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        if ($row['status'] == 1) {
-                                            echo "<a class='text-primary' href='?type=status&operation=deactive&id=" . $row['id'] . "'>Active</a>&nbsp;";
-                                        } else {
-                                            echo "<a class='text-secondary' href='?type=status&operation=active&id=" . $row['id'] . "'>Deactive</a>&nbsp;";
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        echo "<a class='text-danger' href='?type=delete&id=" . $row['id'] . "'>Delete</a>";
-
-                                        ?></td>
-                                    <td><?php
-                                        echo "<a class='text-success' href='add_product.php?id=" . $row['id'] . "'>Edit</a>";
-                                        ?></td>
+                                    <th class="serial"><input type="checkbox" name="" id="checkAll"></th>
+                                    <th class="serial">#</th>
+                                    <th class="column-ID">ID</th>
+                                    <th class=" ">Categories Id</th>
+                                    <th class=" ">image</th>
+                                    <th class=" ">name</th>
+                                    <th class=" ">mrp</th>
+                                    <th class=" ">price</th>
+                                    <th class=" ">qty</th>
+                                    <!-- <th class="column ">short_desc</th> -->
+                                    <!-- <th class="column ">Description</th> -->
+                                    <!-- <th class="column ">meta_title</th> -->
+                                    <!-- <th class="column ">meta_desc</th> -->
+                                    <!-- <th class="column ">meta_keyword</th> -->
+                                    <th class=" ">tex</th>
+                                    <th class=" ">Best Seller</th>
+                                    <th class=" ">Status</th>
+                                    <th class=" ">delete</th>
+                                    <th class=" ">edit</th>
                                 </tr>
-                            <?php
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                    <!-- </form> -->
-                </div>
+                            </thead>
+                            <tbody>
+                                <?php
 
+                                $resultSet = $con->query($sql);
+                                $i = 1;
+                                while ($row = $resultSet->fetch_assoc()) {
+                                ?>
+                                    <tr class="">
+                                        <th scope="row" class="table-data serial"><input type="checkbox" name="id[]" class="checkItem" id="" value='<?php echo $row["id"] ?>'></th>
+                                        <th scope="row" class="table-data serial"><?php echo $i++ ?></th>
+                                        <td class=" table-data  "><?php echo $row['id'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['categories'] ?></td>
+                                        <td class=" table-data  "><img class="product_img" src="<?php echo PRODUCT_IMAGE_SITE_PATH . $row['image'] ?>" alt="Product"></td>
+                                        <td class=" table-data  "><?php echo $row['name'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['price'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['mrp'] ?></td>
+                                        <td class=" table-data  "><?php echo $row['qty'] ?><br><br>
+                                            <?php $productSoldQtyByProductId = productSoldQtyByProductId($con, $row['id']);
+                                            $pending_qty = ($row['qty'] - $productSoldQtyByProductId)
+                                            ?>
+                                            Pending Qty:<?php echo $pending_qty ?>
+                                        </td>
+                                        <!-- <td class=" table-data  "><?php
+                                                                        // echo $row['short_desc']
+                                                                        ?></td> -->
+                                        <!-- <td class=" table-data  "><?php
+                                                                        // echo $row['description'] 
+                                                                        ?></td> -->
+                                        <!-- <td class=" table-data  "><?php
+                                                                        // echo $row['meta_title'] 
+                                                                        ?></td> -->
+                                        <!-- <td class=" table-data  "><?php
+                                                                        // echo $row['meta_desc'] 
+                                                                        ?></td> -->
+                                        <!-- <td class=" table-data  "><?php
+                                                                        // echo $row['meta_keyword'] 
+                                                                        ?></td> -->
+                                        <td class=" table-data  "><?php echo $row['tex'] ?></td>
+                                        <td><?php
+                                            if ($row['best_seller'] == 1) {
+                                                echo "<a class='text-success' href='?type=best_seller&bestSeller=deactive&id=" . $row['id'] . "'>Active</a>&nbsp;";
+                                            } else {
+                                                echo "<a class='text-info'    href='?type=best_seller&bestSeller=active&id=" . $row['id'] . "'>Deactive</a>&nbsp;";
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            if ($row['status'] == 1) {
+                                                echo "<a class='text-primary' href='?type=status&operation=deactive&id=" . $row['id'] . "'>Active</a>&nbsp;";
+                                            } else {
+                                                echo "<a class='text-secondary' href='?type=status&operation=active&id=" . $row['id'] . "'>Deactive</a>&nbsp;";
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            echo "<a class='text-danger' href='?type=delete&id=" . $row['id'] . "'>Delete</a>";
+
+                                            ?></td>
+                                        <td><?php
+                                            echo "<a class='text-success' href='add_product.php?id=" . $row['id'] . "'>Edit</a>";
+                                            ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

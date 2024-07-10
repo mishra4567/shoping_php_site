@@ -1,54 +1,100 @@
 <?php
-// Define your test mode API keys
-$api_key = 'test_f79c08d047eee86d5bf6d6f3631';
-$auth_token = 'test_67dcfd7c9771f471a87e420887d';
-$endpoint = 'https://test.instamojo.com/api/1.1/payment-requests/';
+$con = mysqli_connect("localhost", "root", "", "task-1")
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-// Capture form data (amount, purpose, buyer_name, email, phone)
-// $amount = $_POST['amount'];
-// $purpose = $_POST['purpose'];
-// $buyer_name = $_POST['buyer_name'];
-// $email = $_POST['email'];
-// $phone = $_POST['phone'];
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-// Prepare data for the request
-// $payload = array(
-//     'purpose' => $purpose,
-//     'amount' => $amount,
-//     'buyer_name' => $buyer_name,
-//     'email' => $email,
-//     'phone' => $phone,
-//     'redirect_url' => 'http://your-redirect-url.com/'
-// );
-$payload = array(
-    'purpose' => 'FIFA 16',
-    'amount' => '2500',
-    'buyer_name' => 'John Doe',
-    'email' => 'foo@example.com',
-    'phone' => '9999999999',
-    'redirect_url' => 'http://localhost:8088/project/shoping_php_site/experiment/redirect.php',
-    'send_email' => 'True',
-    // 'webhook' => 'http://www.example.com/webhook/',
-    'allow_repeated_payments' => 'False',
-);
+    <title>Document</title>
+    <style>
+        .multi_select{
+            cursor: pointer;
+            text-decoration: underline !important;
+            border: none;
+            background: none;
+            color: orange;
+        }
+    </style>
+</head>
 
-// Initialize cURL
-$ch = curl_init();
+<body>
+    <?php
+        if(isset($_POST['de_submit'])){
+            if(isset($_POST['id'])){
+                foreach($_POST['id'] as $id){
+                    $query="DELETE FROM product_data WHERE pid='$id'";
+                    mysqli_query($con,$query);
+                }
+            }
+        }
+    ?>
+    <form action="" method="post">
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <td><label for="checkAll" class="multi_select ">Select all</label></td>
+                    <td>Multi Action:-</td>
+                    <!-- <td><input type="submit" name="submit" class="multi_select text-success" value="Best Seller all" onclick="return confirm('Are you sure want to delete')"></td> -->
+                    <td><input type="submit" name="de_submit" class="multi_select text-danger" value="Delete all" onclick="return confirm('Are you sure want to delete')"></td>
+                    <!-- <td><input type="submit" name="se_submit" class="multi_select text-primary" value="Status all" onclick="return confirm('Are you sure want to delete')"></td> -->
+                </tr>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="checkAll"></th>
+                        <th scope="col">#</th>
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">quntity</th>
+                        <th scope="col">price</th>
+                        <th scope="col">image</th>
+                        <th scope="col">tex</th>
+                        <th scope="col">status</th>
+                    </tr>
+                </thead>
+                <?php
+                $data = mysqli_query($con, "SELECT * FROM product_data ")
+                ?>
+                <tbody>
+                    <?php
+                    $i = 1;
+                    while ($row = mysqli_fetch_assoc($data)) {
+                    ?>
+                        <tr>
+                            <th><input type="checkbox"  class="checkItem" id="" value='<?php echo  $row["pid"] ?>' name="id[]" ></th>
+                            <th scope="row"><?php echo $i++ ?></th>
+                            <td><?php echo $row['pid'] ?></td>
+                            <td><?php echo $row['name'] ?></td>
+                            <td><?php echo $row['quntity'] ?></td>
+                            <td><?php echo $row['price'] ?></td>
+                            <td><?php echo $row['image'] ?></td>
+                            <td><?php echo $row['tex'] ?></td>
+                            <td><?php echo $row['status'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <!-- <script src="./jquery.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#checkAll").click(function(){
+                if($(this).is(":checked")){
+                    $(".checkItem").prop('checked',true);
+                }else{
+                    $(".checkItem").prop('checked',false);
+                }
+            });
+        });
+    </script>
+</body>
 
-curl_setopt($ch, CURLOPT_URL, $endpoint);
-curl_setopt($ch, CURLOPT_HEADER, FALSE);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array("X-Api-Key:$api_key", "X-Auth-Token:$auth_token"));
-curl_setopt($ch, CURLOPT_POST, TRUE);
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
-
-$response = curl_exec($ch);
-curl_close($ch);
-
-$json = json_decode($response, true);
-
-// Redirect to the payment URL
-$response=json_decode($response);
-echo '<pre>';
-print_r($response);
+</html>

@@ -17,3 +17,13 @@ let InputFile=document.getElementById("input-img");
 InputFile.onchange=function(){
     profilePic.src=URL.createObjectURL(InputFile.files[0]);
 }
+// multi select
+$(document).ready(function(){
+    $("#checkAll").click(function(){
+        if($(this).is(":checked")){
+            $(".checkItem").prop('checked',true);
+        }else{
+            $(".checkItem").prop('checked',false);
+        }
+    });
+});

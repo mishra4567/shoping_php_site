@@ -22,6 +22,14 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
         mysqli_query($con, $delete_sql);
     }
 }
+if (isset($_POST['de_submit'])) {
+    if (isset($_POST['id'])) {
+        foreach ($_POST['id'] as $id) {
+            $query = "DELETE FROM coupon_master WHERE id='$id'";
+            mysqli_query($con, $query);
+        }
+    }
+}
 include("./sideber.inc.php");
 ?>
 <style>
@@ -41,9 +49,21 @@ include("./sideber.inc.php");
             <div class="">
                 <div class="table-scroll">
                     <!-- <form method="post"> -->
+                    <form action="" method="post">
+                        <table class="table">
+                            <tr>
+                                <td><label for="checkAll" class="multi_select ">Select all</label></td>
+                                <td>Multi Action:-</td>
+                                <!-- <td><input type="submit" name="submit" class="multi_select text-success" value="Best Seller all" onclick="return confirm('Are you sure want to delete')"></td> -->
+                                <td><input type="submit" name="de_submit" class="multi_select text-danger" value="Delete all" onclick="return confirm('Are you sure want to delete')"></td>
+                                <!-- <td><input type="submit" name="se_submit" class="multi_select text-primary" value="Status all" onclick="return confirm('Are you sure want to delete')"></td> -->
+                            </tr>
+                        </table>
                         <table class="table table-striped table-condensed">
                             <thead>
                                 <tr class="">
+                                    <th class="serial"><input type="checkbox" name="" id="checkAll"></th>
+
                                     <th class="   serial">#</th>
                                     <th class="column-ID">ID</th>
                                     <th class=" ">Coupon Code</th>
@@ -63,6 +83,8 @@ include("./sideber.inc.php");
                                 while ($row = $resultSet->fetch_assoc()) {
                                 ?>
                                     <tr class="">
+                                        <th scope="row" class="table-data serial"><input type="checkbox" name="id[]" class="checkItem" id="" value='<?php echo $row["id"] ?>'></th>
+
                                         <th scope="   row" class="table-data serial"><?php echo $i++ ?></th>
                                         <td class=" table-data  "><?php echo $row['id'] ?></td>
                                         <td class=" table-data  "><?php echo $row['coupon_code'] ?></td>
@@ -90,7 +112,9 @@ include("./sideber.inc.php");
                                 ?>
                             </tbody>
                         </table>
-                    <!-- </form> -->
+                        <!-- </form> -->
+                    </form>
+
                 </div>
 
             </div>

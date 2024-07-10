@@ -96,6 +96,7 @@ if(isset($_SESSION['ADMIN_LOGIN'])&& $_SESSION['ADMIN_LOGIN']!=''){
                     <a href="./vendor.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Vendor Master</a>
                     <a href="./contact.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Contact Us</a>
                     <?php } ?>
+                    <a href="./blank.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Blank Page</a>
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">

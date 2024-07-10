@@ -15,3 +15,11 @@
 #input-img{
     display: none;
 }
+/* multi select */
+.multi_select{
+    cursor: pointer;
+    text-decoration: underline !important;
+    border: none;
+    background: none;
+    color: orange;
+}

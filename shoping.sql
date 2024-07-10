@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2024 at 06:51 PM
+-- Generation Time: Jul 10, 2024 at 07:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,9 +44,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `role`, `mobail`, `status`, `manage`) VALUES
 (1, 'admin', 'admin', 'admin', 0, '', 1, 'ADMIN'),
-(3, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'pritam', 1, '7501115937', 1, 'product meneger'),
-(4, 'amit', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'amit', 1, '7501115937', 0, 'user & contact'),
-(5, 'mishra', 'mishrapritam831@gmail.com', '4561', 1, 'Dassboard', 0, '7501115937');
+(3, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'pritam', 1, '7501115937', 1, 'product meneger');
 
 -- --------------------------------------------------------
 
@@ -69,10 +67,6 @@ INSERT INTO `categories` (`id`, `categories`, `status`, `pid`) VALUES
 (25, 'chair', 0, 0),
 (26, 'pritam', 0, 0),
 (27, 'jnvhv', 0, 0),
-(28, 'cat1', 0, 0),
-(29, 'cat2', 0, 0),
-(30, 'cat3', 0, 0),
-(31, 'cat4', 0, 0),
 (32, 'shirt', 0, 0),
 (35, 'mobail', 1, 0),
 (36, 'Redmi', 1, 0),
@@ -98,9 +92,6 @@ CREATE TABLE `contact_us` (
 --
 
 INSERT INTO `contact_us` (`id`, `name`, `email`, `mobail`, `comment`, `added_on`) VALUES
-(1, 'pritam', 'pritam@gmail.com', '9609379300', 'Test Query', '2024-05-01 00:09:10'),
-(2, 'pritam', 'pritam@gmail.com', '9609379300', 'Test Query', '2024-05-01 00:09:10'),
-(3, 'Pritam Mishra', 'a@gmail.com', '6745645', 'ughjbjh', '2024-05-18 08:27:50'),
 (4, 'Pritam Mishra', 'mishrapritam831@gmail.com', '656533', 'gfvghvmhn', '2024-05-19 06:35:22'),
 (5, 'admin', 'mishrapritam831@gmail.com', '64645645645', 'ytdftyfdjhgf', '2024-05-19 06:38:39'),
 (6, 'gbghgg', 'ytfhgf', '35645', 'uytgugjg', '2024-07-04 12:52:02'),
@@ -127,8 +118,6 @@ CREATE TABLE `coupon_master` (
 --
 
 INSERT INTO `coupon_master` (`id`, `coupon_code`, `coupon_value`, `coupon_type`, `cart_min_value`, `status`) VALUES
-(1, 'First50', 20, 'Rupee', 2500, 1),
-(2, 'First60', 20, 'Percentage', 1000, 1),
 (3, 'first10', 20, 'Rupee', 50, 1);
 
 -- --------------------------------------------------------
@@ -192,11 +181,7 @@ INSERT INTO `order` (`id`, `user_id`, `address`, `city`, `pincode`, `payment_typ
 (31, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 40, 'success', 1, '2024-06-30 06:07:56', '', '', '', 3, 20, 'first10'),
 (32, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:00:48', '', '', '', 0, 0, ''),
 (33, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 3, 'success', 1, '2024-07-01 12:02:19', '', '', '', 0, 0, ''),
-(34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60'),
-(35, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 439, 'success', 1, '2024-07-01 01:55:57', '', '', '', 3, 20, 'First10'),
-(36, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 436, 'success', 1, '2024-07-01 02:15:27', '', '', '', 3, 20, 'First10'),
-(37, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2188.8, 'success', 1, '2024-07-01 02:16:37', '', '', '', 2, 547, 'First60'),
-(38, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', -456, 'success', 1, '2024-07-04 05:15:33', '', '', '', 0, 0, '');
+(34, 13, 'asdgdfh', 'wefdastf', 645632, 'COD', 2879.2, 'success', 1, '2024-07-01 12:03:57', '', '', '', 2, 720, 'First60');
 
 -- --------------------------------------------------------
 
@@ -318,7 +303,6 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`, `price`, `qty`, `image`, `short_desc`, `description`, `meta_desc`, `status`, `meta_keyword`, `tex`, `meta_title`, `best_seller`, `added_by`) VALUES
-(20, 35, 1, 'test desc', 6456, 456, 10, '4299934273_matthew-hamilton-3RlGBpFeoQg-unsplash.jpg', 'test desc', 'test desc', '', 0, '', 0, '', 0, 3),
 (21, 36, 6, 'Redmi Note 13 5G (Arctic White, 6GB RAM, 128GB Storage) | 5G Ready | 120Hz Bezel-less AMOLED | 7.mm Slimmest Note Ever | 108MP Pro-grade Camera', 10, 100, 3, '1312583494_71VW8LmqqPL._SX679_.jpg', 'Display: 6.67\" FHD+ pOLED (1080x2400) Ultra-narrow bezels Display with 120Hz Refresh rate; 1000nits peak brightness; Corning Gorilla Glass 5 Display Protection\r\nProcessor:Mediatek Dimensity 6080 6nm Octa-core 5G processor for high performance ; Up to 2.4GHz; Upto 12GB RAM including 6GB Virtual RAM\r\nCamera: 108MP 3X in-sensor zoom AI Triple Camera with 8MP Ultra Wide sensor and 2MP Macro camera| 16MP Front camera\r\nBattery: 5000 mAh large battery with 33W fast charger in-box and Type-C connectivity\r\nMemory, Storage & SIM: 6GB RAM | 128GB UFS 2.2 | Dual SIM (nano+nano) 5G', '', '', 1, '', 0, '', 1, 1),
 (22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, '', 1, 1);
 
@@ -360,9 +344,6 @@ CREATE TABLE `sub_categories` (
 
 INSERT INTO `sub_categories` (`id`, `categories_id`, `sub_categories`, `status`) VALUES
 (1, 35, 'mobail', 1),
-(2, 25, 'uyfhgcv', 0),
-(3, 26, 'uyfghcv', 0),
-(4, 25, 'ytfhgvbn', 0),
 (5, 26, 'uryfujgfigh', 0),
 (6, 36, 'redmi', 1),
 (7, 37, 'Apple', 1);
@@ -387,8 +368,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `mobail`, `added_on`) VALUES
-(1, 'pritam', 'a@gmail.com', '123456', '', '2024-05-01 23:59:28'),
-(4, 'admin', 'e@gmail.com', '454545', '5454545', '2024-05-20 06:44:29'),
 (5, 'admin', 'a@gmail.com1234', '54545', '46464654654', '2024-05-20 06:41:58'),
 (6, 'admin', 'z@gmail.com', '54545', '46464654654', '2024-05-20 06:42:52'),
 (7, 'admin', 'y@gmail.com', '789456', '786645787', '2024-05-20 06:59:37'),
