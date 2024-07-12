@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2024 at 04:46 PM
+-- Generation Time: Jul 12, 2024 at 07:47 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -304,7 +304,22 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`, `price`, `qty`, `image`, `short_desc`, `description`, `meta_desc`, `status`, `meta_keyword`, `tex`, `meta_title`, `best_seller`, `added_by`) VALUES
 (21, 36, 6, 'Redmi Note 13 5G (Arctic White, 6GB RAM, 128GB Storage) | 5G Ready | 120Hz Bezel-less AMOLED | 7.mm Slimmest Note Ever | 108MP Pro-grade Camera', 10, 100, 3, '1312583494_71VW8LmqqPL._SX679_.jpg', 'Display: 6.67\" FHD+ pOLED (1080x2400) Ultra-narrow bezels Display with 120Hz Refresh rate; 1000nits peak brightness; Corning Gorilla Glass 5 Display Protection\r\nProcessor:Mediatek Dimensity 6080 6nm Octa-core 5G processor for high performance ; Up to 2.4GHz; Upto 12GB RAM including 6GB Virtual RAM\r\nCamera: 108MP 3X in-sensor zoom AI Triple Camera with 8MP Ultra Wide sensor and 2MP Macro camera| 16MP Front camera\r\nBattery: 5000 mAh large battery with 33W fast charger in-box and Type-C connectivity\r\nMemory, Storage & SIM: 6GB RAM | 128GB UFS 2.2 | Dual SIM (nano+nano) 5G', '', '', 1, '', 0, '', 1, 1),
-(22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, 'abcd', 1, 1);
+(22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, 'abcd', 1, 1),
+(23, 35, 9, 'test', 565654, 6565, 1111, '7963747925_marissa-grootes-D4jRahaUaIc-unsplash.jpg', '', '', '', 1, '', 0, '', 1, 1),
+(24, 37, 7, 'awrsedtfghyj', 653265, 456, 6545, '2718646205_pexels-thelazyartist-1342609.jpg', '', '', '', 1, '', 0, '', 0, 1),
+(25, 36, 6, 'test desc', 6456, 231, 78, '2587936299_pexels-nickoloui-986831.jpg', '', '', '', 1, '', 0, '', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_images` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -456,6 +471,12 @@ ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `shiprockettoken`
 --
 ALTER TABLE `shiprockettoken`
@@ -529,7 +550,13 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `shiprockettoken`

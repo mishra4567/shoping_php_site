@@ -1,6 +1,7 @@
 <?php
 require_once("./inc/connection.inc.php");
 require_once("./inc/function.inc.php");
+ob_start();
 include_once("./top-inc.php");
 if (isset($_GET['id'])) {
     $product_id = mysqli_real_escape_string($con, $_GET['id']);
@@ -20,8 +21,8 @@ if (isset($_GET['id'])) {
     </script>
 <?php
 }
-$main_url=urlencode($meta_url);
-$main_title=urlencode($meta_title);
+$main_url = urlencode($meta_url);
+$main_title = urlencode($meta_title);
 $facebookShareUrl = "https://www.facebook.com/sharer/sharer.php?u=$main_url";
 $twitterShareUrl = "https://twitter.com/intent/tweet?text=$main_title&url=$main_url";
 $whatsappShareUrl = "https://wa.me/?text=$main_title%20$main_url";
@@ -117,7 +118,7 @@ $whatsappShareUrl = "https://wa.me/?text=$main_title%20$main_url";
                         <div id="social_share_box">
                             <a target="_blank" href="<?php echo $facebookShareUrl ?> " class="social-icon" alt=""><img src="./images/icons/download.png" alt=""></a>
                             <a target="_blank" href="<?php echo $whatsappShareUrl ?> " class="whats-social-icon"><img src="./images/icons/download (1).png" alt=""></a>
-                            <a target="_blank" href="<?php echo $twitterShareUrl ?>"  class="social-icon"><img src="./images/icons/12452418.png" alt=""></a>
+                            <a target="_blank" href="<?php echo $twitterShareUrl ?>" class="social-icon"><img src="./images/icons/12452418.png" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -163,131 +164,86 @@ $whatsappShareUrl = "https://wa.me/?text=$main_title%20$main_url";
 </section>
 <!-- End Product Description -->
 <!-- Start Product Area -->
-<section class="htc__product__area--2 pb--100 product-details-res">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="section__title--2 text-center">
-                    <h2 class="title__line">New Arrivals</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
+<?php
+// unset($_COOKIE['recently_viewed']);
+if (isset($_COOKIE['recently_viewed'])) {
+    // pr(unserialize($_COOKIE['recently_viewed']));
+    $arrRecentView = unserialize($_COOKIE['recently_viewed']);
+    $countRecentView = count($arrRecentView);
+    $countStartRecentView = $countRecentView - 4;
+    if ($countRecentView > 4) {
+        $arrRecentView = array_slice($arrRecentView, $countStartRecentView, 4);
+    }
+    // pr($arrRecentView);
+    $recentViewId = implode(",", $arrRecentView);
+?>
+    <section class="htc__product__area--2 pb--100 product-details-res">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="section__title--2 text-center">
+                        <h2 class="title__line">Recently Viewed</h2>
+                        <p>But I must explain to you how all this mistaken idea</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="product__wrap clearfix">
+                    <?php
+
+                    $rCVSqlRes = mysqli_query($con, "SELECT * FROM product WHERE id IN ($recentViewId)");
+                    while ($list = mysqli_fetch_assoc($rCVSqlRes)) {
+                    ?>
+                        <!-- Start Single Product -->
+                        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
+                            <div class="category">
+                                <div class="ht__cat__thumb">
+                                    <a href="product-details.php?id=<?php echo $list['id'] ?>">
+                                        <img src="<?php echo PRODUCT_IMAGE_SITE_PATH . $list['image'] ?>" alt="product images">
+                                    </a>
+                                </div>
+                                <div class="fr__hover__info">
+                                    <ul class="product__action">
+                                        <li><a href="javascript:void(0)" onclick="wishlist_manage('<?php echo $list['id'] ?>','add')"><i class="icon-heart icons"></i></a></li>
+
+                                        <li><a href="javascript:void(0)" onclick="manage_cart('<?php echo $list['id'] ?>','add')"><i class="icon-handbag icons"></i></a></li>
+
+                                        <!-- <li><a href="#"><i class="icon-shuffle icons"></i></a></li> -->
+                                    </ul>
+                                </div>
+                                <div class="fr__product__inner">
+                                    <h4><a href="product-details.php"><?php echo $list['name'] ?></a></h4>
+                                    <ul class="fr__pro__prize">
+                                        <li class="old__prize">$<?php echo $list['mrp'] ?></li>
+                                        <li>$<?php echo $list['price'] ?></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php  } ?>
+                    <!-- End Single Product -->
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="product__wrap clearfix">
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.php">
-                                <img src="images/product/1.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+    </section>
+<?php
+    $arrRec = unserialize($_COOKIE['recently_viewed']);
+    if (($key = array_search($product_id, $arrRec)) !== false) {
+        unset($arrRec[$key]);
+    }
+    $arrRec[] = $product_id;
+    setcookie('recently_viewed', serialize($arrRec), time() + 60 * 60 * 24 * 365);
+} else {
+    $arrRec[] = $product_id;
+    setcookie('recently_viewed', serialize($arrRec), time() + 60 * 60 * 24 * 365);
+}
 
-                                <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+// $_COOKIE['recently_viewed']=$product_id;
+?>
 
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.php">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.php">
-                                <img src="images/product/2.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
-
-                                <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.php">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.php">
-                                <img src="images/product/3.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
-
-                                <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.php">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-                <!-- Start Single Product -->
-                <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
-                    <div class="category">
-                        <div class="ht__cat__thumb">
-                            <a href="product-details.php">
-                                <img src="images/product/4.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="fr__hover__info">
-                            <ul class="product__action">
-                                <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
-
-                                <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
-
-                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="fr__product__inner">
-                            <h4><a href="product-details.php">Product Title Here </a></h4>
-                            <ul class="fr__pro__prize">
-                                <li class="old__prize">$30.3</li>
-                                <li>$25.9</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Single Product -->
-            </div>
-        </div>
-    </div>
-</section>
 <!-- End Product Area -->
 <!-- End Banner Area -->
 <!-- Start Footer Area -->
-<?php include_once("./footer-inc.php"); ?>
+<?php include_once("./footer-inc.php");
+ob_flush();
+?>
