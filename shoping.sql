@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2024 at 07:01 AM
+-- Generation Time: Jul 12, 2024 at 04:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `name`, `email`, `password`, `role`, `mobail`, `status`, `manage`) VALUES
 (1, 'admin', 'admin', 'admin', 0, '', 1, 'ADMIN'),
-(3, 'pritam', 'gyhfvghfcvyttfyghfvgh@gmail.com', 'pritam', 1, '7501115937', 1, 'product meneger');
+(8, 'test', 'stydent@gmail.com', '4561', 1, 'product', 1, '7501115937');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`, `price`, `qty`, `image`, `short_desc`, `description`, `meta_desc`, `status`, `meta_keyword`, `tex`, `meta_title`, `best_seller`, `added_by`) VALUES
 (21, 36, 6, 'Redmi Note 13 5G (Arctic White, 6GB RAM, 128GB Storage) | 5G Ready | 120Hz Bezel-less AMOLED | 7.mm Slimmest Note Ever | 108MP Pro-grade Camera', 10, 100, 3, '1312583494_71VW8LmqqPL._SX679_.jpg', 'Display: 6.67\" FHD+ pOLED (1080x2400) Ultra-narrow bezels Display with 120Hz Refresh rate; 1000nits peak brightness; Corning Gorilla Glass 5 Display Protection\r\nProcessor:Mediatek Dimensity 6080 6nm Octa-core 5G processor for high performance ; Up to 2.4GHz; Upto 12GB RAM including 6GB Virtual RAM\r\nCamera: 108MP 3X in-sensor zoom AI Triple Camera with 8MP Ultra Wide sensor and 2MP Macro camera| 16MP Front camera\r\nBattery: 5000 mAh large battery with 33W fast charger in-box and Type-C connectivity\r\nMemory, Storage & SIM: 6GB RAM | 128GB UFS 2.2 | Dual SIM (nano+nano) 5G', '', '', 1, '', 0, '', 1, 1),
-(22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, '', 1, 1);
+(22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, 'abcd', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -344,9 +344,12 @@ CREATE TABLE `sub_categories` (
 
 INSERT INTO `sub_categories` (`id`, `categories_id`, `sub_categories`, `status`) VALUES
 (1, 35, 'mobail', 1),
-(5, 26, 'uryfujgfigh', 0),
+(5, 26, 'uryfujgfigh', 1),
 (6, 36, 'redmi', 1),
-(7, 37, 'Apple', 1);
+(7, 37, 'Apple', 1),
+(8, 35, 'uyfhgcv', 1),
+(9, 35, 'uyfghcv', 1),
+(10, 35, 'ytfhgvbn', 1);
 
 -- --------------------------------------------------------
 
@@ -484,7 +487,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -538,7 +541,7 @@ ALTER TABLE `shiprockettoken`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`

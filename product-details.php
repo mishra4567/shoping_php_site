@@ -111,6 +111,7 @@ $whatsappShareUrl = "https://wa.me/?text=$main_title%20$main_url";
                             </div>
                             <?php if ($cart_show != '') { ?>
                                 <a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id'] ?>','add')">Add To Cart</a>
+                                <a class="fr__btn fr__btn_buy" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id'] ?>','add','yes')">Buy Now</a>
                             <?php } ?>
                         </div>
                         <div id="social_share_box">
