@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 12, 2024 at 07:47 PM
+-- Generation Time: Jul 18, 2024 at 04:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -307,7 +307,11 @@ INSERT INTO `product` (`id`, `categories_id`, `sub_categories_id`, `name`, `mrp`
 (22, 37, 7, 'Apple iPhone 13 (256 GB) - Green', 100, 1000, 5, '8517566489_61-r9zOKBCL._SX679_.jpg', '15 cm (6.1-inch) Super Retina XDR display\r\nCinematic mode adds shallow depth of field and shifts focus automatically in your videos\r\nAdvanced dual-camera system with 12MP Wide and Ultra Wide cameras; Photographic Styles, Smart HDR 4, Night mode, 4K Dolby Vision HDR recording\r\n12MP TrueDepth front camera with Night mode, 4K Dolby Vision HDR recording\r\nA15 Bionic chip for lightning-fast performance', '', '', 1, '', 0, 'abcd', 1, 1),
 (23, 35, 9, 'test', 565654, 6565, 1111, '7963747925_marissa-grootes-D4jRahaUaIc-unsplash.jpg', '', '', '', 1, '', 0, '', 1, 1),
 (24, 37, 7, 'awrsedtfghyj', 653265, 456, 6545, '2718646205_pexels-thelazyartist-1342609.jpg', '', '', '', 1, '', 0, '', 0, 1),
-(25, 36, 6, 'test desc', 6456, 231, 78, '2587936299_pexels-nickoloui-986831.jpg', '', '', '', 1, '', 0, '', 1, 1);
+(25, 36, 6, 'test desc', 6456, 231, 78, '2587936299_pexels-nickoloui-986831.jpg', '', '', '', 1, '', 0, '', 1, 1),
+(32, 37, 7, 'u65ytehdgfdc', 565654, 6565, 1111, '5001008512_hannah-montez-2VslRz5G8fo-unsplash.jpg', '', '', '', 0, '', 0, '', 1, 1),
+(38, 37, 7, 'ersdgrtfghbv', 565654, 6565, 1111, '6113624737_bogdan-pasca-ePW8U7EoF54-unsplash.jpg', '23efdcxertdf', '', '', 0, '', 0, '', 1, 1),
+(40, 37, 7, 'q3edersdfg', 456, 45, 45, '2226123416_hannah-montez-05KFkDsxDjk-unsplash.jpg', '', '', '', 0, '', 45, '', 0, 1),
+(41, 37, 7, 'yhyfgyhgvbuhj', 545645, 544, 45, '8083427883_pexels-efrem-efre-2786187-17644421.jpg', '', '', '', 0, '', 54, '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -320,6 +324,25 @@ CREATE TABLE `product_images` (
   `product_id` int(11) NOT NULL,
   `product_images` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `product_id`, `product_images`) VALUES
+(7, 32, '5991735718_braden-jarvis-prSogOoFmkw-unsplash.jpg'),
+(8, 32, '3152133391_frank-mckenna-eXHeq48Z-Q4-unsplash.jpg'),
+(9, 33, '2137265626_braden-jarvis-prSogOoFmkw-unsplash.jpg'),
+(10, 33, '6690438482_frank-mckenna-eXHeq48Z-Q4-unsplash.jpg'),
+(11, 33, '7483996098_hannah-montez-2VslRz5G8fo-unsplash.jpg'),
+(12, 40, '9943925286_bogdan-pasca-ePW8U7EoF54-unsplash.jpg'),
+(13, 40, '1699623976_braden-jarvis-prSogOoFmkw-unsplash.jpg'),
+(14, 40, '9246737463_frank-mckenna-eXHeq48Z-Q4-unsplash.jpg'),
+(15, 40, '8716624618_hannah-montez-2VslRz5G8fo-unsplash.jpg'),
+(16, 41, '7573858107_zac-ong-_q4-ykeXOPE-unsplash.jpg'),
+(17, 41, '9202608233_vincentiu-solomon-Z4wF0h47fy8-unsplash.jpg'),
+(18, 41, '8120174086_robert-v-ruggiero-ZmiSMijwhvo-unsplash.jpg'),
+(19, 41, '9181655393_pexels-nam-quan-nguy-n-459228913-18023659.jpg');
 
 -- --------------------------------------------------------
 
@@ -550,13 +573,13 @@ ALTER TABLE `order_status`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(111) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `shiprockettoken`
