@@ -38,6 +38,7 @@ if (isset($_GET['type']) && $_GET['type'] != '') {
         $id = get_safe_value($con, $_GET['id']);
         $delete_sql = "DELETE FROM product WHERE id='$id' $condition1 ";
         mysqli_query($con, $delete_sql);
+        // unlink();
     }
 }
 if(isset($_POST['de_submit'])){

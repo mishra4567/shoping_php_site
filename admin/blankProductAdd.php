@@ -216,6 +216,18 @@
                                                 <label for="qty" class="from-control-label fw-bold">Qty</label>
                                                 <input type="text" name="qty" class="form-control" id="" placeholder="Enter product qty" value="">
                                             </div>
+                                            <!-- Enter multiple image start -->
+                                            <div class="row mt-3">
+                                                <div class="col-md-6">
+                                                    <label for="" class="from-control-label fw-bold">Would You Add Multiple Images</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="form-control bg-info text-light" onclick="add_more_images()">Add</button>
+                                                </div>
+                                            </div>
+                                            <div id="image_box">
+                                            </div>
+                                            <!-- Enter multiple image end -->
                                             <div class="form-group mt-3 ">
                                                 <label for="short_desc" class="from-control-label fw -bold">Short description</label>
                                                 <textarea name="short_desc" class="form-control" id="" rows="5" placeholder="Enter Short description"></textarea>
@@ -257,6 +269,34 @@
                                                 <input type="file" name="image" class="form-control" id="input-img" accept="image/jpg, image/png, image/jpeg">
                                                 <label class="input-img" for="input-img">Update Image...</label>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body card-block">
+                                            <h4 class=" bg-warning">Note</h4>
+                                            <h6 class="text-danger">Please Select One Time 4 Picture</h6>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body card-block">
+                                            <!-- <h1 class="mb-4">Product Gallery</h1> -->
+                                            <!-- <form id="galleryForm"> -->
+                                            <div class="form-group">
+                                                <label for="galleryInput" class="form-control-file-label">Select Images</label>
+                                                <input type="file" class="form-control-file" id="galleryInput" multiple>
+                                            </div>
+                                            <!-- </form> -->
+                                            <div id="gallery" class=""></div>
+                                            <div class="preview">
+                                                <h3>Image Preview</h3>
+                                                <img id="previewImage" src="#" alt="Image Preview">
+                                            </div>
+                                            <label for="galleryInput" class="form-control-file-label-2nd">Select Images....</label>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body card-block">
+
                                         </div>
                                     </div>
                                     <div class="card">
@@ -354,6 +394,90 @@
 
         InputFile.onchange = function() {
             profilePic.src = URL.createObjectURL(InputFile.files[0]);
+        }
+        // add_more_images
+        var total_image = 1;
+
+        function add_more_images() {
+            // alert('fg');
+            total_image++;
+            var html = '<div class="row" id="add_image_box_' + total_image + '"><div class="col-md-10" ><label for="categories" class="form-control-label">Image</label><input type="file" name="product_images[]" class="form-control input-img" accept="image/jpg, image/png, image/jpeg" required></div><div class="col-md-2"><label for=""></label><button type="button" class="form-control bg-warning text-light" onclick=remove_image("' + total_image + '")>remove</button></div></div>';
+            // jQuery('#image_box').after(html);
+            jQuery('#image_box').append(html);
+
+        }
+
+        function remove_image(id) {
+            jQuery('#add_image_box_' + id).remove();
+        }
+    </script>
+    <script>
+        $('#galleryInput').on('change', function(e) {
+            const files = e.target.files;
+            const $gallery = $('#gallery');
+            const currentItems = $gallery.find('.gallery-item').length;
+            const maxItems = 4;
+
+            if (currentItems + files.length > maxItems) {
+                alert(`You can only add up to ${maxItems} images. You already have ${currentItems} images.`);
+                return;
+            }
+
+            $.each(files, function(index, file) {
+                addImageToGallery(file, $gallery);
+            });
+        });
+
+        function addImageToGallery(file, $gallery) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const $col = $('<div>', {
+                    class: 'col-md-3 gallery-item'
+                });
+
+                const $img = $('<img>', {
+                    src: event.target.result,
+                    class: 'my-img-thumbnail',
+                    'data-toggle': 'modal',
+                    'data-target': '#imageModal',
+                    click: function() {
+                        $('#previewImage').attr('src', $img.attr('src'));
+                        $('.preview').show();
+                    }
+                });
+
+                const $deleteBtn = $('<button>', {
+                    class: 'action-btn delete-btn',
+                    html: '<i class="fas fa-trash-alt"></i>',
+                    click: function() {
+                        $col.remove();
+                    }
+                });
+
+                const $editBtn = $('<button>', {
+                    class: 'action-btn edit-btn',
+                    html: '<i class="fas fa-edit"></i>',
+                    click: function() {
+                        const $editInput = $('<input>', {
+                            type: 'file',
+                            name: 'imageNames[]',
+                            style: 'display: none;',
+                            change: function(e) {
+                                const newFile = e.target.files[0];
+                                const newReader = new FileReader();
+                                newReader.onload = function(newEvent) {
+                                    $img.attr('src', newEvent.target.result);
+                                };
+                                newReader.readAsDataURL(newFile);
+                            }
+                        });
+                        $editInput.click();
+                    }
+                });
+                $col.append($img, $deleteBtn, $editBtn);
+                $gallery.append($col);
+            };
+            reader.readAsDataURL(file);
         }
     </script>
 </body>
