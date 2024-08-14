@@ -1,0 +1,27 @@
+PHP Website Security & Hacking Proevention
+
+1:- Principle of Least Privilege
+2:- Passwords and Encryption
+3:- Data hiding
+4:- Security Through Obscurity
+5:- Accout lock attacks
+6:- Error reporting
+7:- Forced Browsing
+8:- Path Traversal
+9:- Data parameter delimiters
+10:- SQL/PHP injection attacks
+11:- XSS attacks
+12:- Session Hijack / Fixation
+13:- Phishing
+14:- General Security Principle
+
+"Dont trust user Data"
+
+--------- Start --------
+"State of being Protected of safe"
+01:- Why web Security
+-websites are public
+-users add personal Information
+-knowledge and action
+-takes years to be an expert
+-on going process
